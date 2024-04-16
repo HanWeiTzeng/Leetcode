@@ -16,7 +16,7 @@ struct ListNode* middleNode(struct ListNode* head) {
     }
     return midnode;
 }
-
+/*
 =====================
 
 struct ListNode* middleNode(struct ListNode* head){
@@ -27,7 +27,6 @@ struct ListNode* middleNode(struct ListNode* head){
     }
     return slow;
 }
-/*
 作者：糗菇凉
 链接：https://leetcode.cn/problems/middle-of-the-linked-list/solutions/2105939/lian-biao-de-zhong-jian-jie-dian-by-qiu-kl0rd/
 来源：力扣（LeetCode）
