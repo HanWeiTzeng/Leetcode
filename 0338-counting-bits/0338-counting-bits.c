@@ -22,4 +22,3 @@ int* countBits(int n, int* returnSize) {
     *returnSize = n + 1;
     return ret_arr;
 }
-}
