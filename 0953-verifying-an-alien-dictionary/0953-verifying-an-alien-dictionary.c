@@ -12,8 +12,6 @@ bool isAlienSorted(char** words, int wordsSize, char* order) {
         while  (order[pos2] != words[i+1][j]) {
             pos2++;
         }
-        printf("%c %d", order[pos1],pos1);
-        printf("%c %d\n", order[pos2],pos2);
         if (pos1 > pos2) {
             return false;
         } else if (pos1 < pos2) {
