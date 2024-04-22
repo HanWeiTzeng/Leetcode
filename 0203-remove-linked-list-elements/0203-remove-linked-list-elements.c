@@ -21,6 +21,7 @@ struct ListNode* removeElements(struct ListNode* head, int val) {
         if (pre->val == val) {
             free(pre);
             pre = curr;
+            head = pre;
             curr = curr->next;
             if (curr == NULL && pre->val == val) {
                 free(pre);
