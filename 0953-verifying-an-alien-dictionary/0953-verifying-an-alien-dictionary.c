@@ -22,7 +22,7 @@ bool isAlienSorted(char** words, int wordsSize, char* order) {
             j++;
             if (words[i][j] != '\0' && words[i+1][j] == '\0') {
                 return false;
-            } else if (words[i][j] == '\0' && words[i+1][j] == '\0') {
+            } else if (words[i][j] == '\0') {
                 i++;
                 j = 0;
             }
