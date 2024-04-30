@@ -14,6 +14,7 @@ void divid_ll(struct ListNode* head, struct ListNode** first, struct ListNode** 
     *second = slow->next;
     slow->next = NULL;
 }
+
 void mergesort(struct ListNode** refhead) {
     struct ListNode* head = *refhead;
     struct ListNode* first;
