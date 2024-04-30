@@ -1,23 +1,28 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
-void divide_ll(struct ListNode* head, struct ListNode** a, struct ListNode** b) {
-    struct ListNode *slow = head;
-    struct ListNode *fast = head->next;
-    while (fast) {
+struct ListNode* sortedmerge(struct ListNode* first, struct ListNode* second);
+
+void divid_ll(struct ListNode* head, struct ListNode** first, struct ListNode** second) {
+    struct ListNode* slow = head;
+    struct ListNode* fast = head->next;
+    while(fast) {
         fast = fast->next;
         if (fast != NULL) {
             fast = fast->next;
             slow = slow->next;
         }
     }
-    *a = head;
-    *b = slow->next;
+    *first = head;
+    *second = slow->next;
     slow->next = NULL;
+}
+void mergesort(struct ListNode** refhead) {
+    struct ListNode* head = *refhead;
+    struct ListNode* first;
+    struct ListNode* second;
+    if (head == NULL || head->next == NULL) return;
+    divid_ll(head, &first, &second);
+    mergesort(&first);
+    mergesort(&second);
+    *refhead = sortedmerge(first, second);    
 }
 
 struct ListNode* sortedmerge(struct ListNode* first, struct ListNode* second) {
@@ -34,22 +39,7 @@ struct ListNode* sortedmerge(struct ListNode* first, struct ListNode* second) {
     return result;
 }
 
-void mergesort(struct ListNode** refhead) {
-    struct ListNode* first;
-    struct ListNode* second;
-    struct ListNode* head = *refhead;
-    if (head == NULL || head->next == NULL) return;
-
-    divide_ll(head, &first, &second);
-    mergesort(&first);
-    mergesort(&second);
-    *refhead = sortedmerge(first, second);
-}
-
-
 struct ListNode* sortList(struct ListNode* head) {
-    if (head == NULL || head->next == NULL) return head;
-    struct ListNode* newhead = head;
     mergesort(&head);
     return head;
 }
