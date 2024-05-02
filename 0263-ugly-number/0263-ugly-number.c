@@ -1,6 +1,5 @@
 bool isUgly(int n) {
     if (n <= 0) return false;
-
     int pre_n = 0;
     while (n > 1 && pre_n != n) {
         pre_n = n;
