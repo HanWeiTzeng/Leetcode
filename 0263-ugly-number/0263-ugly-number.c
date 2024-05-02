@@ -1,22 +1,20 @@
 bool isUgly(int n) {
     if (n <= 0) return false;
-    int tmp = 0;
+
     int pre_n = 0;
     while (n > 1 && pre_n != n) {
         pre_n = n;
-        tmp = n/2;
-        if (n == tmp*2) {
-            n = tmp;
+        if ((n/2)*2 == n) {
+            n /= 2;
         }
-        tmp = n/3;
-        if (n == tmp*3) {
-            n = tmp;
+        if ((n/3)*3 == n) {
+            n /= 3;
         }
-        tmp = n/5;
-        if (n == tmp*5) {
-            n = tmp;
+        if ((n/5)*5 == n) {
+            n /= 5;
         }
     }
+
     if (n == 1)
         return true;
         else {
