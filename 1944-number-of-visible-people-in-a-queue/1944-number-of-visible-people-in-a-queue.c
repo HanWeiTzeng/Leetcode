@@ -4,20 +4,21 @@
 
 int* canSeePersonsCount(int* heights, int heightsSize, int* returnSize) {
     *returnSize = heightsSize;
-    int *ret_arr = (int *) malloc(sizeof(int) * heightsSize);
-    int idx_ret_arr = 0;
-    while (idx_ret_arr < heightsSize) {
-        int block_height = 0;
-        ret_arr[idx_ret_arr] = 0;
-        for (int i = idx_ret_arr+1; i < heightsSize; i++) {
-            if (block_height < heights[i]) {
-                if (heights[idx_ret_arr] > block_height)
-                ret_arr[idx_ret_arr]++;
-                block_height = heights[i];
-            }
-            if (block_height >= heights[idx_ret_arr]) break;
+    int n = heightsSize;
+    int *ret_arr = (int *) malloc(sizeof(int) * n);
+    int *stack = (int *) malloc(sizeof(int) * n);
+    int stackSize = 0;
+    for (int i = n-1; i >= 0; i--) {
+        ret_arr[i] = 0;
+        while (stackSize > 0 && stack[stackSize-1] <= heights[i]) {
+            stackSize--;
+            ret_arr[i]++;
         }
-        idx_ret_arr++;
+        if (stackSize > 0) {
+            ret_arr[i]++;
+        }
+        stack[stackSize++] = heights[i];
     }
+
     return ret_arr;
 }
