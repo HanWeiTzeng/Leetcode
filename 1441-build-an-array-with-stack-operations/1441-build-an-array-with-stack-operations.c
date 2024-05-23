@@ -31,7 +31,7 @@ char** buildArray(int* target, int targetSize, int n, int* returnSize) {
         } else {
             ret_arr[count_all_op] = (char *)malloc((4 + 1) * sizeof(char));
             ret_arr[count_all_op++] = "Push";
-            ret_arr[count_all_op] = (char *)malloc((4 + 1) * sizeof(char));
+            ret_arr[count_all_op] = (char *)malloc((3 + 1) * sizeof(char));
             //printf("%s ",ret_arr[count_all_op-1]);
             ret_arr[count_all_op++] = "Pop";
             //printf("%s ",ret_arr[count_all_op-1]);
