@@ -12,14 +12,14 @@ typedef struct {
 
 MinStack* minStackCreate() {
     MinStack *newstack = (MinStack*) malloc(sizeof(MinStack));
-    if (!newstack) return NULL; // Allocated memory failed.
+    //if (!newstack) return NULL; // Allocated memory failed.
     newstack->min = NULL;
     newstack->top = NULL;
     return newstack;
 }
 struct linked_list *create_node(val) {
     struct linked_list *newnode  = (struct linked_list *) malloc(sizeof(struct linked_list));
-    if(!newnode) return NULL;
+    //if(!newnode) return NULL; // Allocated memory failed.
     newnode->val = val;
     newnode->next = NULL;
     return newnode;
@@ -50,7 +50,7 @@ void minStackPush(MinStack* obj, int val) {
     }
     node->next = obj->top;
     obj->top = node;
-    printf("obj->top->val %d\n",obj->top->val);
+    //printf("obj->top->val %d\n",obj->top->val);
     return;
 }
 
@@ -67,9 +67,9 @@ void delete_min_node(struct linked_list *node, int target) {
     return;
 }
 void minStackPop(MinStack* obj) {
-    if (!obj->top) {
-        printf("This stack is empty.\n");
-    }
+    //if (!obj->top) {
+    //    printf("This stack is empty.\n");
+    //}
     if (obj->min->val == obj->top->val) {
         struct linked_list *tmp_min = obj->min;
         obj->min = obj->min->next;
@@ -85,15 +85,15 @@ void minStackPop(MinStack* obj) {
 }
 
 int minStackTop(MinStack* obj) {
-    if (!obj->top) {
-        printf("This stack is empty.\n");
-        return -1;
-    }
+    //if (!obj->top) {
+    //    printf("This stack is empty.\n");
+    //    return -1;
+    //}
     return obj->top->val;
 }
 
 int minStackGetMin(MinStack* obj) {
-    if (!obj->top) return -1;
+    //if (!obj->top) return -1;
     return obj->min->val;
 }
 
