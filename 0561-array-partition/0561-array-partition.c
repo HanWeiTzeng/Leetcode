@@ -12,7 +12,7 @@ int partition(int *nums, int left, int right) {
         while (i < right && nums[i] <= pivot) {
             i++;
         }
-        while (j > left && nums[j] >= pivot) {
+        while (j >= left && nums[j] >= pivot) {
             j--;
         }
         if (i < j) {
@@ -26,9 +26,9 @@ int partition(int *nums, int left, int right) {
 }
 void quickSort(int *nums, int left, int right) {
     if (left < right) {
-        int pivot = partition(nums, left, right);
-        quickSort(nums, left, pivot-1);
-        quickSort(nums, pivot+1, right);
+        int partition_pos = partition(nums, left, right);
+        quickSort(nums, left, partition_pos-1);
+        quickSort(nums, partition_pos+1, right);
     }
 }
 int arrayPairSum(int* nums, int numsSize) {
