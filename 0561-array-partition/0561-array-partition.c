@@ -78,9 +78,9 @@ int arrayPairSum(int* nums, int numsSize) {
     int count = 0;
     //mergesort(nums, 0, numsSize-1);
     quickSort(nums, 0, numsSize-1);
-    for (int i = 0; i < numsSize; i++) {
-        printf("%d ", nums[i]);
-    }
+    //for (int i = 0; i < numsSize; i++) {
+    //    printf("%d ", nums[i]);
+    //}
     for (int i = 0; i < numsSize; i += 2) {
         count += nums[i];
     }
