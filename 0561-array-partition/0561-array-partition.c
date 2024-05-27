@@ -9,7 +9,7 @@ int partition(int *nums, int left, int right) {
     int i = left;
     int j = right - 1;
     while (i < j) {
-        while (i <= right-1 && nums[i] <= pivot) {
+        while (i <= j && nums[i] <= pivot) {
             i++;
         }
         while (j >= left && nums[j] >= pivot) {
