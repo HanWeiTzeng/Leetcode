@@ -9,7 +9,7 @@ int partition(int arr[], int low, int high) {
     int pivot = arr[high];  // pivot
     int i = (low);      // Index of smaller element
 
-    for (int j = low; j <= high - 1; j++) {
+    for (int j = low; j < high; j++) {
         // If current element is smaller than or equal to pivot
         if (arr[j] <= pivot) {
             swap(&arr[i], &arr[j]);
