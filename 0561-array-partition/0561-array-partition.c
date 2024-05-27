@@ -1,28 +1,23 @@
-void swap(int *a, int *b) {
-    int tmp = *a;
+void swap(int* a, int* b) {
+    int temp = *a;
     *a = *b;
-    *b = tmp;
+    *b = temp;
 }
 
-int partition(int *nums, int left, int right) {
-    int pivot = nums[right];
-    int i = left;
-    int j = right - 1;
-    while (i < j) {
-        while (i <= j && nums[i] <= pivot) {
-            i++;
-        }
-        while (j >= i && nums[j] >= pivot) {
-            j--;
-        }
-        if (i < j) {
-            swap(&nums[i], &nums[j]);
+// Function to partition the array and return the pivot index
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];  // pivot
+    int i = (low);      // Index of smaller element
+
+    for (int j = low; j <= high - 1; j++) {
+        // If current element is smaller than or equal to pivot
+        if (arr[j] <= pivot) {
+            swap(&arr[i], &arr[j]);
+            i++;    // increment index of smaller element
         }
     }
-    if (nums[i] > pivot) {
-        swap(&nums[i], &nums[right]);
-    }
-    return i;
+    swap(&arr[i], &arr[high]);
+    return (i);
 }
 void quickSort(int *nums, int left, int right) {
     if (left < right) {
