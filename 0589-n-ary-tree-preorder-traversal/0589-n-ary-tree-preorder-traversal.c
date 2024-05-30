@@ -22,12 +22,8 @@ void helper(struct Node* root, int* size_of_root, int *stack) {
 
 int* preorder(struct Node* root, int* returnSize) {
     int size_root = 0;
-    int stack[10000];
-    helper(root, &size_root, stack);
+    int *ret_arr = (int *) malloc(sizeof(int) * 10000);
+    helper(root, &size_root, ret_arr);
     *returnSize = size_root;
-    int *ret_arr = (int *) malloc(sizeof(int) * *returnSize);
-    for (int i = 0; i < size_root; i++) {
-        ret_arr[i] = stack[i];
-    }
     return ret_arr;
 }
