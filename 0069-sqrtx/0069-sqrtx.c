@@ -5,11 +5,11 @@ int mySqrt(int x) {
     while (left <= right) {
         int middle = (right+left)/2;
         if (x/middle == middle && x%middle == 0) {return middle;}
-        else if (middle > x/middle) {
+        else if (x/middle < middle) {
             right = middle-1;
-        } else if (middle <= x/middle) {
+        } else if (x/middle >= middle) {
             left = middle+1;
         }
     }
-    return left-1;
+    return right;
 }
