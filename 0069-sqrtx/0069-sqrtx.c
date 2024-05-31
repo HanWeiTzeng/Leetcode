@@ -11,5 +11,5 @@ int mySqrt(int x) {
             left = middle+1;
         }
     }
-    return right;
+    return left-1;
 }
