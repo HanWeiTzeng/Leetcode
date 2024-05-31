@@ -5,7 +5,43 @@
  *     struct ListNode *next;
  * };
  */
+struct ListNode* mergeTwoSortedList(struct ListNode* list1, struct ListNode* list2) {
+    if (list1 == NULL && list2 == NULL) return NULL;
+    struct ListNode* head = (struct ListNode*) malloc (sizeof(struct ListNode));
+    struct ListNode* dummy = head;
+    
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->val < list2->val) {
+            head->next = list1;
+            list1 = list1->next;
+        } else {
+            head->next = list2;
+            list2 = list2->next;
+        }
+        head = head->next;
+    }
 
+    while (list1 != NULL) {
+        head->next = list1;
+        list1 = NULL;
+    }
+    while (list2 != NULL) {
+        head->next = list2;
+        list2 = NULL;
+    }
+    return dummy->next;
+}
+ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
+    if (listsSize == 0) return NULL;
+    //merge list into list[0];
+    int i = 1;
+    while (i < listsSize) {
+        lists[0] = mergeTwoSortedList(lists[0], lists[i]);
+        i++;
+    }
+    return lists[0];
+}
+/*
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
     if (listsSize == 0) return NULL;
     int idx = 0;
@@ -29,3 +65,4 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
     head->next = mergeKLists(lists, listsSize);
     return head;
 }
+*/
