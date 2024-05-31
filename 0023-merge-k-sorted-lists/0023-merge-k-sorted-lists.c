@@ -6,7 +6,6 @@
  * };
  */
 
-
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
     if (listsSize == 0) return NULL;
     int idx = 0;
