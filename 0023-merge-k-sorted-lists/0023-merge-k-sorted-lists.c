@@ -6,10 +6,10 @@
  * };
  */
 struct ListNode* mergeTwoSortedList(struct ListNode* list1, struct ListNode* list2) {
-    if (list1 == NULL && list2 == NULL) return NULL;
+    //if (list1 == NULL && list2 == NULL) return NULL;
     struct ListNode* head = (struct ListNode*) malloc (sizeof(struct ListNode));
     struct ListNode* dummy = head;
-    
+
     while (list1 != NULL && list2 != NULL) {
         if (list1->val < list2->val) {
             head->next = list1;
@@ -21,13 +21,10 @@ struct ListNode* mergeTwoSortedList(struct ListNode* list1, struct ListNode* lis
         head = head->next;
     }
 
-    while (list1 != NULL) {
+    if (list1 != NULL) {
         head->next = list1;
-        list1 = NULL;
-    }
-    while (list2 != NULL) {
+    } else {
         head->next = list2;
-        list2 = NULL;
     }
     return dummy->next;
 }
