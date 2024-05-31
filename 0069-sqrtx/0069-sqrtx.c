@@ -3,12 +3,14 @@ int mySqrt(int x) {
     int left = 0;
     int right = x;
     while (left <= right) {
-        int middle = (right+left)/2;
-        if (x/middle == middle && x%middle == 0) {return middle;}
+        int middle = (left+right)/2;
+        if (x/middle == middle && x%middle == 0) return middle;
         else if (x/middle < middle) {
-            right = middle-1;
-        } else if (x/middle >= middle) {
+            right = middle-1; // 8: 0 ~ 3
+            printf("right %d\n", right);
+        } else if (x/middle > middle) { //2nd 8:2~3
             left = middle+1;
+            printf("left %d\n", left);
         }
     }
     return left-1;
