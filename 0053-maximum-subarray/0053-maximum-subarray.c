@@ -27,17 +27,14 @@ int maxSubArray(int* nums, int numsSize) {
             }
         } else {
             sum_pre += nums[i-1];
-            printf("sum_pre %d\n", sum_pre);
             if (nums[i-1] > sum_pre) {
                 sum_pre = nums[i-1];
-                printf("Change sum_pre %d\n", sum_pre);
             }
             if (nums[i] > max_subarray_tv) {
                 max_subarray_tv = nums[i];
                 idx = i;
             }
         }
-        //sum_pre = 0;
     }
     return max_subarray_tv;
 }
