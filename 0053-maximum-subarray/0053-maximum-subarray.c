@@ -5,7 +5,6 @@ int max(int a, int b) {
 int maxSubArray(int* nums, int numsSize) {
     int max_subarray_sum = nums[0];
     int sum_pre = 0;
-    //max_subarray_sum = nums[0];  
     for (int i = 1; i < numsSize; i++) {
         sum_pre += nums[i-1];
         sum_pre = max(sum_pre, nums[i-1]);
