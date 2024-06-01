@@ -1,6 +1,5 @@
 int maxSubArray(int* nums, int numsSize) {
     int max_subarray_sum = 0;
-    int idx = 0;
     int sum_pre = 0;
     int i = 0;
     for (int i = 0; i < numsSize; i++) {
@@ -16,14 +15,12 @@ int maxSubArray(int* nums, int numsSize) {
                     if (nums[i] > max_subarray_sum) {
                         max_subarray_sum = nums[i];
                     }
-                    idx = i;
                 } else if (sum_pre >= 0 && sum_pre + nums[i] > max_subarray_sum) {
                     max_subarray_sum = sum_pre + nums[i];
                 }
             } else { // if (nums[i] <= 0)
                 if (nums[i] > max_subarray_sum) {
                     max_subarray_sum = nums[i];
-                    idx = i;
                 }
             }
         }
