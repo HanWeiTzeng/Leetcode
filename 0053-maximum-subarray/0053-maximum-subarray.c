@@ -1,7 +1,6 @@
 int maxSubArray(int* nums, int numsSize) {
     int max_subarray_sum = 0;
     int sum_pre = 0;
-    int i = 0;
     for (int i = 0; i < numsSize; i++) {
         if (i == 0) {
             max_subarray_sum = nums[i];  
