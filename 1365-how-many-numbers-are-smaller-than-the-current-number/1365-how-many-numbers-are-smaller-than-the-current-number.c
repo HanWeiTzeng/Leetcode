@@ -35,15 +35,11 @@ void merge(int arr[], int left, int mid, int right, int *ori_idx) {
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
-            printf("L arr[%d] %d ori_idx[%d] %d -> %d\n", k, L[i], k, ori_idx[k], left + i);
-            //ori_idx[k] = left + i;
             ori_idx[k] = L_idx[i];
             i++;
         } else {
             arr[k] = R[j];
-            printf("R arr[%d] %d ori_idx[%d] %d -> %d\n", k, R[j], k, ori_idx[k], mid + 1 + j);
             ori_idx[k] = R_idx[j];
-            //ori_idx[k] = mid + 1 + j;
             j++;
         }
         k++;
@@ -52,9 +48,7 @@ void merge(int arr[], int left, int mid, int right, int *ori_idx) {
     // Copy the remaining elements of L[], if there are any
     while (i < n1) {
         arr[k] = L[i];
-        printf("LLarr[%d] %d ori_idx[%d] %d -> %d\n", k, L[i], k, ori_idx[k], left + i);
         ori_idx[k] = L_idx[i];
-        //ori_idx[k] = left + i;
         i++;
         k++;
     }
@@ -62,10 +56,6 @@ void merge(int arr[], int left, int mid, int right, int *ori_idx) {
     // Copy the remaining elements of R[], if there are any
     while (j < n2) {
         arr[k] = R[j];
-        
-        printf("RRarr[%d] %d ori_idx[%d] %d -> %d\n", k, R[j], k, ori_idx[k], mid + 1 + j);
-        //ori_idx[k] = mid + 1 + j;
-
         ori_idx[k] = R_idx[j];
         j++;
         k++;
@@ -94,13 +84,6 @@ void mergeSort(int arr[], int left, int right, int *ori_idx) {
     }
 }
 
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
-
 int* smallerNumbersThanCurrent(int* nums, int numsSize, int* returnSize) {
     int *ori_idx = (int *) malloc(numsSize * sizeof(int));
     int *ret_arr = (int *) malloc(numsSize * sizeof(int));
@@ -122,13 +105,9 @@ int* smallerNumbersThanCurrent(int* nums, int numsSize, int* returnSize) {
         }
     }
     ret_arr[0] = 0;
-    printArray(sorted_arr, numsSize);
-    printArray(ret_arr, numsSize);
-    printArray(ori_idx, numsSize);
     for (int i = 0; i < numsSize; i++) {
         sorted_arr[ori_idx[i]] = ret_arr[i];
     }
-    printArray(sorted_arr, numsSize);
 
     free(ori_idx);
     free(ret_arr);
