@@ -67,17 +67,10 @@ void mergeSort(int **arr, int left, int right, int k, int* scoreColSize) {
     }
 }
 
-/*void swap(int** score1,int** score2) {
-    int *tmp = *score1;
-    *score1 = *score2;
-    *score2 = tmp;
-}*/
 
 int** sortTheStudents(int** score, int scoreSize, int* scoreColSize, int k, int* returnSize, int** returnColumnSizes) {
     *returnSize = scoreSize;
     *returnColumnSizes = scoreColSize;
     mergeSort(score, 0, scoreSize-1, k, scoreColSize);
-    //printf("scoreSize %d\n", scoreSize);
-    //printf("scoreColSize %d\n", scoreColSize);
     return score;
 }
