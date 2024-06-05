@@ -84,9 +84,16 @@ void mergeSort(int arr[], int left, int right, int *ori_idx) {
     }
 }
 
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
 int* smallerNumbersThanCurrent(int* nums, int numsSize, int* returnSize) {
     int *ori_idx = (int *) malloc(numsSize * sizeof(int));
-    int *ret_arr = (int *) malloc(numsSize * sizeof(int));
+    int *arr_big = (int *) malloc(numsSize * sizeof(int));
     int *sorted_arr = (int *) malloc(numsSize * sizeof(int));
 
     for (int i = 0; i < numsSize; i++) {
@@ -98,19 +105,23 @@ int* smallerNumbersThanCurrent(int* nums, int numsSize, int* returnSize) {
 
     for (int i = numsSize - 1; i > 0; i--) {
         int j = 0;
-        ret_arr[i] = i;
+        arr_big[i] = i;
         while (j < i && sorted_arr[i-j] == sorted_arr[i - 1 -j]) {
-            ret_arr[i]--;
+            arr_big[i]--;
             j++;
         }
     }
-    ret_arr[0] = 0;
+    arr_big[0] = 0;
+    printArray(sorted_arr, numsSize);
+    printArray(arr_big, numsSize);
+    printArray(ori_idx, numsSize);
     for (int i = 0; i < numsSize; i++) {
-        sorted_arr[ori_idx[i]] = ret_arr[i];
+        sorted_arr[ori_idx[i]] = arr_big[i];
     }
+    printArray(sorted_arr, numsSize);
 
     free(ori_idx);
-    free(ret_arr);
+    free(arr_big);
 
     *returnSize = numsSize;
     return sorted_arr;
