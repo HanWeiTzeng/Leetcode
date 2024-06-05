@@ -29,13 +29,13 @@ int* deckRevealedIncreasing(int* deck, int deckSize, int* returnSize) {
     //show_queue(idx_queue);
     int i = 0;
     int *ret_arr = (int *)malloc(sizeof(int)*deckSize);
-    while (idx_queue->front && i < deckSize) {
-
-        //printf("idx_queue->front->val %d i = %d",idx_queue->front->val, i);
+    while (idx_queue->front) {
         ret_arr[idx_queue->front->val] =  deck[i++];
         idx_queue->front = idx_queue->front->next;
-        int tmp = dequeue(idx_queue);
-        enqueue(idx_queue, tmp);
+        if (i < deckSize) {
+            int tmp = dequeue(idx_queue);
+            enqueue(idx_queue, tmp);
+        }
     }
     return ret_arr;
 }
