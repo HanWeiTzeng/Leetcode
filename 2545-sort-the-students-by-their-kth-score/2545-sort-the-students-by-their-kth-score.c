@@ -71,6 +71,10 @@ void mergeSort(int **arr, int left, int right, int k, int* scoreColSize) {
 int** sortTheStudents(int** score, int scoreSize, int* scoreColSize, int k, int* returnSize, int** returnColumnSizes) {
     *returnSize = scoreSize;
     *returnColumnSizes = scoreColSize;
-    mergeSort(score, 0, scoreSize-1, k, scoreColSize);
-    return score;
+    int **ret_arr = (int **)malloc(*returnSize * sizeof(int*));
+    for (int i = 0; i < scoreSize; i++) {
+        ret_arr[i] = score[i];
+    }
+    mergeSort(ret_arr, 0, scoreSize-1, k, scoreColSize);
+    return ret_arr;
 }
