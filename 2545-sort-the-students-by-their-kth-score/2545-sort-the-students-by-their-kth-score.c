@@ -22,7 +22,7 @@ int** sortTheStudents(int** score, int scoreSize, int* scoreColSize, int k, int*
             }
         }
     }
-    printf("scoreSize %d\n", scoreSize);
-    printf("scoreColSize %d\n", scoreColSize);
+    //printf("scoreSize %d\n", scoreSize);
+    //printf("scoreColSize %d\n", scoreColSize);
     return score;
 }
