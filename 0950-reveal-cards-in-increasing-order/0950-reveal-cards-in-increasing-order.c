@@ -14,9 +14,12 @@ struct queue {
 struct queue *create_queue();
 void enqueue(struct queue *queue, int value);
 int dequeue(struct queue *queue);
-void show_queue(struct queue *queue);
+//void show_queue(struct queue *queue);
 void merge(int arr[], int left, int mid, int right);
 void mergeSort(int arr[], int left, int right);
+void free_queue(struct queue *queue) {
+    free(queue);
+}
 
 int* deckRevealedIncreasing(int* deck, int deckSize, int* returnSize) {
     *returnSize = deckSize;
@@ -30,13 +33,14 @@ int* deckRevealedIncreasing(int* deck, int deckSize, int* returnSize) {
     int i = 0;
     int *ret_arr = (int *)malloc(sizeof(int)*deckSize);
     while (idx_queue->front) {
-        ret_arr[idx_queue->front->val] =  deck[i++];
+        ret_arr[idx_queue->front->val] = deck[i++];
         idx_queue->front = idx_queue->front->next;
         if (i < deckSize) {
             int tmp = dequeue(idx_queue);
             enqueue(idx_queue, tmp);
         }
     }
+    free_queue(idx_queue);
     return ret_arr;
 }
 
@@ -145,6 +149,7 @@ int dequeue(struct queue *queue) {
     free(node);
     return tmp;
 }
+/*
 void show_queue(struct queue *queue) {
     if (queue->front == NULL) {
         printf("this queue is empty.\n");
@@ -158,3 +163,4 @@ void show_queue(struct queue *queue) {
     printf("\n");
     return;
 }
+*/
