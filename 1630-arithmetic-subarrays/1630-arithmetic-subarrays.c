@@ -36,12 +36,6 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
-// Utility function to print an array
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
 bool check_arith(int *array, int arr_size) {
     int common_difference = array[1] - array[0];
     for (int i = 1; i < arr_size-1; i++) {
@@ -62,7 +56,6 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize, int* 
             check_arithmetic_arr[j] = nums[l[i]+j];
         }
         quickSort(check_arithmetic_arr, 0, length-1);
-        printArray(check_arithmetic_arr, length);
         return_bool[i] = check_arith(check_arithmetic_arr, length);
     }
     return return_bool;
