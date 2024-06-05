@@ -10,7 +10,6 @@ char * sortSentence(char * s){
     int i = 0;
     while (s[i] != '\0') {
         if ('1'<= s[i] && s[i] <= '9') {
-            printf("s[i] = %c (number)\n", s[i]);
             str[k] = '\0';
             // create char* return string.
             str_arr[s[i]-'1'] = (char *) malloc(sizeof(char)* (k+1));
@@ -19,10 +18,8 @@ char * sortSentence(char * s){
             max_number++;
         } else if (s[i] == ' ') {
             count++;
-            printf("Hit space.\n");
         } else {
             str[k++] = s[i];
-            printf("s[i] = %c\n", s[i]);
             count++;
         }
         i++;
@@ -30,7 +27,6 @@ char * sortSentence(char * s){
 
     free(str);
     char *ret_arr = (char *)malloc(sizeof(char)*(count+1));
-    printf("max_number %d. count %d\n", max_number, count);
     int l = 0;
     for (int i = 0; i < max_number; i++) {
         strcpy(ret_arr+l, str_arr[i]);
