@@ -24,16 +24,16 @@ char * sortSentence(char * s){
         }
         i++;
     }
-
     free(str);
+    k = 0;
     char *ret_arr = (char *)malloc(sizeof(char)*(count+1));
-    int l = 0;
     for (int i = 0; i < max_number; i++) {
-        strcpy(ret_arr+l, str_arr[i]);
-        l += strlen(str_arr[i]);
-        if (i < max_number-1) ret_arr[l] = ' ';
-        l++;
+        strcpy(ret_arr+k, str_arr[i]);
+        k += strlen(str_arr[i]);
+        ret_arr[k] = ' ';
+        k++;
     }
+    ret_arr[k-1] = '\0';
 
     free(str_arr);
     return ret_arr;
