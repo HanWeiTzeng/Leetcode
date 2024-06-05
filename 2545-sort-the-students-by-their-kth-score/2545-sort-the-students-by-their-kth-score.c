@@ -3,6 +3,23 @@
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
+
+/*
+用Quick Sort變形
+int myK; 
+int compare(const void *a, const void* b) {
+    int** aa = (int **)a;
+    int** bb = (int **)b;
+    return bb[0][myK] - aa[0][myK];
+}
+int** sortTheStudents(int** score, int scoreSize, int* scoreColSize, int k, int* returnSize, int** returnColumnSizes) {
+    myK = k;
+    qsort(score, scoreSize, sizeof(int *), compare);
+    *returnSize = scoreSize;
+    *returnColumnSizes = scoreColSize;
+    ret
+*/
+
 void merge(int **arr, int left, int mid, int right, int l, int* scoreColSize) {
     int i, j, k;
     int n1 = mid - left + 1;
