@@ -25,7 +25,10 @@ int findTheWinner(int n, int k) {
     //display_queue(table_queue);
 
     for (int i = 1; i <= n-1; i++) {
-        int count = k;  // 2
+        int count = k-1;  // 4
+        count %= (n-i+1);  // 4%6 4%5 4%4 4%3
+        count++;    // 5 5 1 2 1 1
+
         while (count > 1) {
             table_queue->front = table_queue->front->next;
             table_queue->rear = table_queue->rear->next;
