@@ -12,35 +12,30 @@ struct queue *create_queue(void);
 struct linked_list *create_node(int value);
 void enqueue(struct queue *queue, int value);
 int dequeue(struct queue *queue);
-void display_queue(struct queue *queue);
 
 int findTheWinner(int n, int k) {
     // create a linked list queue with n node.
     struct queue *table_queue = create_queue();
     int table_people_num = n;
+
     // it need to be circular queue
     for (int i = 1; i <= n; i++) {
         enqueue(table_queue, i);
     }
-    //display_queue(table_queue);
 
     for (int i = 1; i <= n-1; i++) {
-        int count = k-1;  // 4
-        count %= (n-i+1);  // 4%6 4%5 4%4 4%3
-        count++;    // 5 5 1 2 1 1
-
+        int count = k-1;
+        count %= (n-i+1);
+        count++;
         while (count > 1) {
             table_queue->front = table_queue->front->next;
             table_queue->rear = table_queue->rear->next;
             count--;
         }
         dequeue(table_queue);
-        //printf("Dequeue: %d ", dequeue(table_queue));
-        //display_queue(table_queue);
     }
-
-    return dequeue(table_queue);
     // return it when node number is 1
+    return dequeue(table_queue);
 }
 
 
@@ -96,15 +91,4 @@ struct linked_list *create_node(int value) {
     newnode->val = value;
     newnode->next = NULL;
     return newnode;
-}
-
-void display_queue(struct queue *queue) {
-    struct linked_list *tmpnode = queue->front;
-    printf("The queue is: ");
-    while (tmpnode != queue->rear) {
-        printf("%d ", tmpnode->val);
-        tmpnode = tmpnode->next;
-    }
-    printf("%d ", tmpnode->val);
-    printf("\n");
 }
