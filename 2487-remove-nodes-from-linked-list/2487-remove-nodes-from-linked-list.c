@@ -31,9 +31,9 @@ struct ListNode* removeNodes(struct ListNode* head) {
     // keep the max value, and use it to judge.
     while (trav_listnode) {
         tmp = trav_listnode->next;
-        if (max > trav_listnode->val) { // 8 8
+        /*if (max > trav_listnode->val) { // 8 8
             free(trav_listnode);
-        } else if (max <= trav_listnode->val) {
+        } else */if (max <= trav_listnode->val) {
             max = trav_listnode->val;
             dummynode->next = trav_listnode;
             dummynode = dummynode->next;
