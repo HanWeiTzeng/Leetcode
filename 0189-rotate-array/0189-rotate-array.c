@@ -1,6 +1,6 @@
 void rotate(int* nums, int numsSize, int k) {
     // reduce times.
-    k = k % numsSize;
+    //k = k % numsSize;
     int count = 0;
     int i = 0;
     int pop_out = nums[i];     // 1
