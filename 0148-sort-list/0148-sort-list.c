@@ -23,7 +23,7 @@ void mergesort(struct ListNode** refhead) {
     divid_ll(head, &first, &second);
     mergesort(&first);
     mergesort(&second);
-    *refhead = sortedmerge(first, second);    
+    *refhead = sortedmerge(first, second);
 }
 
 struct ListNode* sortedmerge(struct ListNode* first, struct ListNode* second) {
