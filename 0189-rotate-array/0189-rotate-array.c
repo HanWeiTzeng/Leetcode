@@ -18,6 +18,7 @@ void rotate(int* nums, int numsSize, int k) {
             check_list[i] = 1;
         } else {
             i = (i+1) % numsSize;
+            if (check_list[i] == 1) return;
             pop_out = nums[i];
             check_list[i] = 1;
         }
