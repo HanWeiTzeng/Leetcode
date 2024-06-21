@@ -59,6 +59,14 @@ int** insert(int** intervals, int intervalsSize, int* intervalsColSize, int* new
         added = 1;
     }
     while (i < intervalsSize) {
+        if (intervals[i][0] > newInterval[1] && added == 0) {
+            for (int j = 0; j < newIntervalSize; j++) {
+                ret_arr[*returnSize][j] = newInterval[j];
+            }
+            added = 1;
+            *((*returnColumnSizes) + *returnSize) = 2;
+            *returnSize = *returnSize + 1;
+        }
         if (intervals[i][1] < newInterval[0] || intervals[i][0] > newInterval[1]) {
             for (int j = 0; j < intervalsColSize[i]; j++) {
                 ret_arr[*returnSize][j] = intervals[i][j];
