@@ -102,20 +102,20 @@ int** updateMatrix(int** mat, int matSize, int* matColSize, int* returnSize, int
 
             // Enqueue valid neighbors
             if (x - 1 >= 0 && ret_mat[x - 1][y] == INT_MAX) {
+                ret_mat[x - 1][y] = ret_mat[x][y] + 1;
                 enqueue(queue, x - 1, y);
             }
             if (x + 1 < matSize && ret_mat[x + 1][y] == INT_MAX) {
+                ret_mat[x + 1][y] = ret_mat[x][y] + 1;
                 enqueue(queue, x + 1, y);
             }
             if (y - 1 >= 0 && ret_mat[x][y - 1] == INT_MAX) {
+                ret_mat[x][y - 1] = ret_mat[x][y] + 1;
                 enqueue(queue, x, y - 1);
             }
             if (y + 1 < matColSize[x] && ret_mat[x][y + 1] == INT_MAX) {
+                ret_mat[x][y + 1] = ret_mat[x][y] + 1;
                 enqueue(queue, x, y + 1);
-            }
-            if (ret_mat[x][y] == INT_MAX) {
-                ret_mat[x][y] = level;
-                printf("ret_mat[%d][%d] = %d. level = %d\n", x, y, ret_mat[x][y], level);
             }
             free(tmp); // Free the temporary storage // Here!
         }
