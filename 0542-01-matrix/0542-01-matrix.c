@@ -59,7 +59,7 @@ void enqueue(struct queue *queue, int value1, int value2) {
 
 int *dequeue(struct queue *queue) {
     if (isEmpty(queue)) {
-        return -1;
+        return NULL;
     }
     int *tmp = (int *)malloc(sizeof(int) * 2);
     tmp[0] = queue->array[queue->front][0];
@@ -96,7 +96,7 @@ int** updateMatrix(int** mat, int matSize, int* matColSize, int* returnSize, int
         int size = checkSize(queue);
         for (int i = 0; i < size; i++) {
             int *tmp = dequeue(queue);
-            int x = tmp[0], y = tmp[1];
+            int x = tmp[0], y = tmp[1];\
 
             // Enqueue valid neighbors
             if (x - 1 >= 0 && ret_mat[x - 1][y] == INT_MAX) {
