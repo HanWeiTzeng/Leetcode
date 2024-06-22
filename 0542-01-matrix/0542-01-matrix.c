@@ -91,7 +91,6 @@ int** updateMatrix(int** mat, int matSize, int* matColSize, int* returnSize, int
         }
     }
 
-    int level = 0;
     while (isEmpty(queue) != 1) {
         int size = checkSize(queue);
         for (int i = 0; i < size; i++) {
@@ -117,7 +116,6 @@ int** updateMatrix(int** mat, int matSize, int* matColSize, int* returnSize, int
             }
             free(tmp); // Free the temporary storage // Here!
         }
-        level++;
     }
     return ret_mat;
 }
