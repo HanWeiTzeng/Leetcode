@@ -55,12 +55,10 @@ void enqueue(struct queue *queue, int value1, int value2) {
     queue->array[queue->rear][0] = value1;
     queue->array[queue->rear][1] = value2;
     queue->size++;
-    printf("%d %d is enqueue.\n", queue->array[queue->rear][0], queue->array[queue->rear][1]);
 }
 
 int *dequeue(struct queue *queue) {
     if (isEmpty(queue)) {
-        printf("This queue is empty.(%s)\n",__FUNCTION__);
         return -1;
     }
     int *tmp = (int *)malloc(sizeof(int) * 2);
@@ -119,7 +117,6 @@ int** updateMatrix(int** mat, int matSize, int* matColSize, int* returnSize, int
             }
             free(tmp); // Free the temporary storage // Here!
         }
-        printf("level up %d.\n", level);
         level++;
     }
     return ret_mat;
