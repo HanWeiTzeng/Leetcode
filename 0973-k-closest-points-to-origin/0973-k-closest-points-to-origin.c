@@ -44,10 +44,7 @@ int** kClosest(int** points, int pointsSize, int* pointsColSize, int k, int* ret
                 min_index = j;
             }
         }
-        printf("min_index %d min_value %lf.\n", min_index, min_value);
-        printf("Before %lf %lf.\n", distance[i], distance[min_index]);
         swap(distance+i, distance+min_index);
-        printf("After %lf %lf.\n", distance[i], distance[min_index]);
         // rem to give ret_mat[i] = (int *)malloc ...
         swap_int(&points[i][0], &points[min_index][0]);
         swap_int(&points[i][1], &points[min_index][1]);
