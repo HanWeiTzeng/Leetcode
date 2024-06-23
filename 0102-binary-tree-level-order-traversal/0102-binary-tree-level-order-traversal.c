@@ -28,15 +28,13 @@ void helper(struct TreeNode* root, int* returnSize, int** returnColumnSizes, int
 }
 
 int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes) {
+    *returnSize = 0;
     if (root == NULL) {
-        *returnSize = 0;
         returnColumnSizes = NULL;
         return NULL;
     }
     int** ret_mat = (int **)malloc(sizeof(int*) * 2000);
     *returnColumnSizes = (int *)calloc(2000, sizeof(int));
-
-    *returnSize = 0;
     int level = 0;
     helper(root, returnSize, returnColumnSizes, level, ret_mat);
     return ret_mat;
