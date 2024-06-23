@@ -21,7 +21,6 @@ void helper(struct TreeNode* root, int* returnSize, int** returnColumnSizes, int
     //deal with level 0
     if ((*returnColumnSizes)[level] == 0) {
         ret_mat[level] = (int *)malloc(2000 * sizeof(int));
-        //(*returnColumnSizes)[level] = 0;
     }
     ret_mat[level][(*returnColumnSizes)[level]++] = root->val;
     helper(root->left, returnSize, returnColumnSizes, level+1, ret_mat);
@@ -35,10 +34,8 @@ int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes
         return NULL;
     }
     int** ret_mat = (int **)malloc(sizeof(int*) * 2000);
-    *returnColumnSizes = (int *)malloc(sizeof(int *) * 2000);
-    for (int i = 0; i < 2000; i++) {
-        (*returnColumnSizes)[i] = 0;
-    }
+    *returnColumnSizes = (int *)calloc(2000, sizeof(int));
+
     *returnSize = 0;
     int level = 0;
     helper(root, returnSize, returnColumnSizes, level, ret_mat);
