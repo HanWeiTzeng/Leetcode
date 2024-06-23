@@ -18,8 +18,7 @@ int maxDepth(struct TreeNode* root) {
     return (left > right)? left : right; 
 }
 
-void addnum(int size, int **ret_mat, int val, int level)
-{
+void addnum(int size, int **ret_mat, int val, int level) {
     ret_mat[level] = realloc(ret_mat[level], size * sizeof(int));
     ret_mat[level][size-1] = val;
 }
@@ -30,8 +29,9 @@ void helper(struct TreeNode* root, int** returnColumnSizes, int level, int** ret
     }
     (*returnColumnSizes)[level]++;
     addnum((*returnColumnSizes)[level], ret_mat, root->val, level);
-    helper(root->left, returnColumnSizes, level+1, ret_mat);
-    helper(root->right, returnColumnSizes, level+1, ret_mat);
+    level++;
+    helper(root->left, returnColumnSizes, level, ret_mat);
+    helper(root->right, returnColumnSizes, level, ret_mat);
 }
 
 
