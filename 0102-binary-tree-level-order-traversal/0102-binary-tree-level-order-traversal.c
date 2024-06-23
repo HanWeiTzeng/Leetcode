@@ -36,11 +36,12 @@ void helper(struct TreeNode* root, int** returnColumnSizes, int level, int** ret
 
 
 int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes) {
-    *returnSize = 0;
     if (root == NULL) {
+        *returnSize = 0;
         returnColumnSizes = NULL;
         return NULL;
     }
+    // Find max depth for setting *returnSize & ret_mat & *returnColumnSizes
     int depth = maxDepth(root);
     *returnSize = depth;
     int** ret_mat = calloc(depth, sizeof (int *));
