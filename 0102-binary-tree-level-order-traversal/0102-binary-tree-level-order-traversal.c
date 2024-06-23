@@ -30,7 +30,6 @@ void helper(struct TreeNode* root, int** returnColumnSizes, int level, int** ret
     }
     (*returnColumnSizes)[level]++;
     addnum((*returnColumnSizes)[level], ret_mat, root->val, level);
-    //level++;
     helper(root->left, returnColumnSizes, level+1, ret_mat);
     helper(root->right, returnColumnSizes, level+1, ret_mat);
 }
