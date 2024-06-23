@@ -43,8 +43,8 @@ int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes
     }
     *returnSize = maxDepth(root);
     int** ret_mat = (int **)malloc(sizeof(int*) * *returnSize);
+    *returnColumnSizes = (int *)calloc(*returnSize, sizeof(int));
     *returnSize = 0;
-    *returnColumnSizes = (int *)calloc(2000, sizeof(int));
     int level = 0;
     helper(root, returnSize, returnColumnSizes, level, ret_mat);
     return ret_mat;
