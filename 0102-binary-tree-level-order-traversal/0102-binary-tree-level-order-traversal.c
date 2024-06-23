@@ -11,6 +11,13 @@
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
+int maxDepth(struct TreeNode* root) {
+    if (root == NULL) return 0;
+    int left = maxDepth(root->left)+1;
+    int right = maxDepth(root->right)+1;
+    return (left > right)? left : right; 
+}
+
 void helper(struct TreeNode* root, int* returnSize, int** returnColumnSizes, int level, int** ret_mat) {
     if (root == NULL) {
         return;
@@ -27,13 +34,16 @@ void helper(struct TreeNode* root, int* returnSize, int** returnColumnSizes, int
     helper(root->right, returnSize, returnColumnSizes, level+1, ret_mat);
 }
 
+
 int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes) {
     *returnSize = 0;
     if (root == NULL) {
         returnColumnSizes = NULL;
         return NULL;
     }
-    int** ret_mat = (int **)malloc(sizeof(int*) * 2000);
+    *returnSize = maxDepth(root);
+    int** ret_mat = (int **)malloc(sizeof(int*) * *returnSize);
+    *returnSize = 0;
     *returnColumnSizes = (int *)calloc(2000, sizeof(int));
     int level = 0;
     helper(root, returnSize, returnColumnSizes, level, ret_mat);
