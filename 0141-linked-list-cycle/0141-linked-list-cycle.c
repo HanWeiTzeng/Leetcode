@@ -5,22 +5,22 @@
  *     struct ListNode *next;
  * };
  */
-
-// 注意：查cycle -> two pointer ->1 個走一步 2個走兩步
-
 bool hasCycle(struct ListNode *head) {
-    if (head == NULL || head->next == NULL) return false;
-    // Two pointer
-    struct ListNode *ptr1st = head, *ptr2nd = head->next;
-
-    while (ptr1st != ptr2nd) {
-        if (ptr1st != NULL) {          /// 這邊不用留
-            ptr1st = ptr1st->next;
-        } else return false;
-        if (ptr2nd != NULL && ptr2nd->next != NULL) {
-            ptr2nd = ptr2nd->next->next;
-        } else return false;
+    // use fast and slower pointer
+    if (head == NULL) return false;
+    struct ListNode *slower = head;
+    struct ListNode *faster = head->next;
+    while (slower && faster) {
+        if (slower == faster) {
+            return true;
+        } else {
+            slower = slower->next;
+            faster = faster->next;
+            if (faster == NULL) {
+                return false;
+            }
+            faster = faster->next;
+        }
     }
-    // it has cycle if it breaks while loop;
-    return true;
+    return false;
 }
