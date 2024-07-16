@@ -4,6 +4,8 @@
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
 
+// 這題要注意 DFS 深度搜尋要另外寫才有辦法改
+
 void dfs(int** image, int imageSize, int* imageColSize, int sr, int sc, int color, int original_color) {
     if (sr < 0 || sc < 0 || sr >= imageSize || sc >= imageColSize[0]) {
         return;
@@ -18,7 +20,6 @@ void dfs(int** image, int imageSize, int* imageColSize, int sr, int sc, int colo
 }
 
 int** floodFill(int** image, int imageSize, int* imageColSize, int sr, int sc, int color, int* returnSize, int** returnColumnSizes) {
-    
     *returnSize = imageSize;
     *returnColumnSizes = imageColSize;
 
