@@ -6,7 +6,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     *returnSize = 2;
     // use 2 pointers i j to calculate sum
     int i = 0, j = 1;
-    while (i != j && i < numsSize && j < numsSize) {
+    while (i < numsSize) {
         while (j < numsSize) {
             if (nums[i] + nums[j] != target) {
                 j++;
