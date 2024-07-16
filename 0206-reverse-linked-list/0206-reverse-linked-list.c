@@ -6,7 +6,8 @@
  * };
  */
 struct ListNode* reverseList(struct ListNode* head) {
-    if (head == NULL) return NULL;
+    if (head == NULL)
+        return NULL;
     // create new pointer
     struct ListNode* previous = NULL;
     struct ListNode* current = head;
