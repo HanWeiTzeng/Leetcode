@@ -1,18 +1,23 @@
-//哈希表也可以用
-
 int longestPalindrome(char* s) {
-    int count_letter[126] = {0};
+    int letters[52] = {0};
     int str_len_s = strlen(s);
-    int count = 0;
-
     for (int i = 0; i < str_len_s; i++) {
-        count_letter[s[i]]++;
+        if (s[i] >= 'a' && s[i] <= 'z') {
+            letters[s[i] - 'a']++;
+        } else if (s[i] >= 'A' && s[i] <= 'Z') {
+            letters[s[i] - 'A' + 26]++;
+        }
     }
-
-    for (int i = 0; i < 126; i++) {
-        count += count_letter[i] - count_letter[i]%2;     // 重要算法  免除判斷
+    int flag_odd = 0;
+    int count = 0;
+    for (int i = 0; i < 52; i++) {
+        count += letters[i] / 2 * 2;
+        if (flag_odd == 0 && letters[i] % 2 == 1) {
+            flag_odd = 1;
+        }
     }
-
-    if (count != str_len_s) return count+1;
+    if (flag_odd == 1) {
+        count++;
+    }
     return count;
 }
