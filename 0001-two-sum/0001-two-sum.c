@@ -1,19 +1,24 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-
 int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
-    for (int i = 0; i < numsSize; i++) {
-        for (int j = i+1; j < numsSize; j++) {
-            if (nums[i] + nums[j] == target) {
-                int *answer = (int*) malloc(sizeof(int)*2);
-                answer[0] = i;
-                answer[1] = j;
-                *returnSize = 2;
-                return answer;
+    int *ret_arr = (int *)malloc(sizeof(int)*2);
+    *returnSize = 2;
+    // use 2 pointers i j to calculate sum
+    int i = 0, j = 1;
+    while (i != j && i < numsSize && j < numsSize) {
+        while (j < numsSize) {
+            if (nums[i] + nums[j] != target) {
+                j++;
+            } else {
+                ret_arr[0] = i;
+                ret_arr[1] = j;
+                printf("Catch!, ret_arr[0] %d, ret_arr[1] %d", ret_arr[0], ret_arr[1]);
+                return ret_arr;
             }
         }
+        i++;
+        j = i+1;
     }
-    *returnSize = 0;
     return NULL;
 }
