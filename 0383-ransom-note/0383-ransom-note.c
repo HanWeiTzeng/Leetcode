@@ -1,36 +1,15 @@
-// Runtime: 3ms
-
 bool canConstruct(char* ransomNote, char* magazine) {
-    int countLetter[256] = {0};
-    int sr = strlen(ransomNote);
-    int sm = strlen(magazine);
-
-    for (int i = 0; i < sm; i++) {
-        countLetter[magazine[i]]++;
+    int letters[26] = {0};
+    int str_len_ransomNote = strlen(ransomNote);
+    int str_len_magazine = strlen(magazine);
+    for (int i = 0; i < str_len_magazine; i++) {
+        letters[magazine[i]-'a']++;
     }
-
-    for (int i = 0; i < sr; i++){
-        if (--countLetter[ransomNote[i]] < 0) return false;
+    for (int i = 0; i < str_len_ransomNote; i++) {
+        letters[ransomNote[i]-'a']--;
+        if (letters[ransomNote[i]-'a'] < 0) {
+            return false;
+        }
     }
     return true;
 }
-
-
-// ====================
-///Runtime: 6ms
- /*
-bool canConstruct(char* ransomNote, char* magazine) {
-    int a[26] = {0};
-    int i = 0;
-    while (magazine[i] != '\0') {
-        a[magazine[i]-'a']++;
-        i++;
-    }
-    i = 0;
-    while (ransomNote[i] != '\0') {
-        if (--a[ransomNote[i]-'a'] < 0) return false;
-        i++;
-    }
-    return true;
-}
- */
