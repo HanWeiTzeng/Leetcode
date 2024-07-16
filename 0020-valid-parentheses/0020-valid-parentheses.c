@@ -1,3 +1,5 @@
+// 可以直接用push pop empty stack to check.
+
 bool isValid(char* s) {
     // create a stack, put ([{ and pop it when hit )]}
     int str_len_s = strlen(s);
