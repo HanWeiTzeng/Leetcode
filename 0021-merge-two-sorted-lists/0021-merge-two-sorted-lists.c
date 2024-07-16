@@ -1,39 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
 struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
-    // check if list1/list2 is NULL, yes return another
-    if(list1 == NULL) return list2;
-    if(list2 == NULL) return list1;
-    struct ListNode *head = NULL, *rh;
-    // check the first node of list1 if bigger than first node of list2
-    while(list1 != NULL && list2 != NULL) {
-        if (head == NULL) {
-            if (list1->val <= list2->val) {
-                head = list1;
-                list1 = list1->next;
-            } else {
-                head = list2;
-                list2 = list2->next;
-            }
-            rh = head;
-    // yes, than check second node of list1 with first node of list2
-    // no, check second node of list2 with first node of list1
-        } else {
-            if (list1->val <= list2->val) {
-                head->next = list1;
-                list1 = list1->next;
-                head = head->next;
-            } else {
-                head->next = list2;
-                list2 = list2->next;
-                head = head->next;
-            }
-        }
-    }
+    // Handle list1 and list2 == NULL
+    if (list1 == NULL && list2 == NULL) return NULL;
+    if (list1 == NULL) return list2;
+    if (list2 == NULL) return list1;
 
-    // deal with the rest of list1/list2.
-    if (list1 == NULL && list2 != NULL) {
-        head->next = list2; 
-    } else if (list2 == NULL && list1 != NULL) {
-        head->next = list1;         
+    // create a new head
+    struct ListNode* head = NULL;
+    struct ListNode* ret_head = NULL;
+    struct ListNode* dummy_node = malloc(sizeof(struct ListNode));
+    head = dummy_node;
+    ret_head = dummy_node;
+
+    // continue to compare list1 and list2
+    // break while loop if list1 == NULL or list2 == NULL
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->val <= list2->val) {
+            head->next = list1; // 1
+            list1 = list1->next;
+        } else {
+            head->next = list2;
+            list2 = list2->next;
+        }
+        head = head->next;
     }
-    return rh;
+    // add the rest of list1 or list2
+    while (list1 != NULL) {
+            head->next = list1;
+            list1 = list1->next;
+            head = head->next;
+    }
+    while (list2 != NULL) {
+            head->next = list2;
+            list2 = list2->next;
+            head = head->next;
+    }
+    return ret_head->next;
 }
