@@ -1,38 +1,69 @@
-//  1. 這題也可以用轉換成10進位，加完再換回來
-//  2. 直接 char + carry到底:
-
-void reverse(char* s) {
-    int s_len = strlen(s);
-    for(int i = 0; i < s_len/2; i++) {      // Remeber: reverse just need to run half of string.
-        char t = s[i];
-        s[i] = s[s_len-1-i];
-        s[s_len-1-i] = t;
-    }
-}
-
 char* addBinary(char* a, char* b) {
-    char* c;
-    int a_len = strlen(a);
-    int b_len = strlen(b);
-    int len = fmax(a_len , b_len);
+    int str_len_a = strlen(a);
+    int str_len_b = strlen(b);
+    int max_str_len = fmax(str_len_a, str_len_b);
+    char *ret_str = (char *) malloc(sizeof(char)*(max_str_len+2));
     int carry = 0;
-    c = (char *)malloc(sizeof(char)*(len+2));
-    reverse(a);
-    reverse(b);
-    for (int i = 0; i < len; i++) {
-        (i < a_len) ? carry += (a[i] == '1') : 0;
-        (i < b_len) ? carry += (b[i] == '1') : 0;
-        c[i] = '0' + carry % 2;    // since it's binary logical.
-        					//printf("a= %c b = %c c = %c %d",a[i], b[i], c[i], i);
-        					//printf("carry = %d \n", carry);
-        carry /= 2;
+    int index_a = str_len_a-1;
+    int index_b = str_len_b-1;
+    int index_c = 0;
+    while (index_a >= 0 && index_b >= 0) {
+        if (a[index_a] == '1' && b[index_b] == '1' && carry == 1) {
+            ret_str[index_c++] = '1';
+        } else if (a[index_a] == '1' && b[index_b] == '1' && carry == 0) {
+            carry = 1;
+            ret_str[index_c++] = '0';
+        } else if (a[index_a] == '1' && b[index_b] == '0' && carry == 1) {
+            ret_str[index_c++] = '0';
+        } else if (a[index_a] == '0' && b[index_b] == '1' && carry == 1) {
+            ret_str[index_c++] = '0';
+        } else if (a[index_a] == '0' && b[index_b] == '1' && carry == 0) {
+            ret_str[index_c++] = '1';
+        } else if (a[index_a] == '1' && b[index_b] == '0' && carry == 0) {
+            ret_str[index_c++] = '1';
+        } else if (a[index_a] == '0' && b[index_b] == '0' && carry == 0) {
+            ret_str[index_c++] = '0';
+        } else if (a[index_a] == '0' && b[index_b] == '0' && carry == 1) {
+            carry = 0;
+            ret_str[index_c++] = '1';
+        }
+        index_a--;
+        index_b--;
     }
-    					//printf("carry = %d", carry);
-    if (carry) {
-        c[len++] = '1';
+    while (index_b >= 0) {
+        if (b[index_b] == '1' && carry == 1) {
+            ret_str[index_c++] = '0';
+        } else if (b[index_b] == '1' && carry == 0) {
+            ret_str[index_c++] = '1';
+        } else if (b[index_b] == '0' && carry == 1) {
+            ret_str[index_c++] = '1';
+            carry = 1;
+        } else if (b[index_b] == '0' && carry == 0) {
+            ret_str[index_c++] = '0';
+        }
+        index_b--;
     }
-    c[len] = '\0';
-    reverse(c);
-    return c;
+    while (index_a >= 0) {
+        if (a[index_a] == '1' && carry == 1) {
+            ret_str[index_c++] = '0';
+        } else if (a[index_a] == '1' && carry == 0) {
+            ret_str[index_c++] = '1';
+        } else if (a[index_a] == '0' && carry == 1) {
+            ret_str[index_c++] = '1';
+            carry = 1;
+        } else if (a[index_a] == '0' && carry == 0) {
+            ret_str[index_c++] = '0';
+        }
+        index_a--;
+    }
+    if (carry == 1) {
+        ret_str[index_c++] = '1';
+    }
+    for (int i = 0; i < index_c/2; i++) {
+        char tmp = ret_str[i];
+        ret_str[i] = ret_str[index_c-1-i];
+        ret_str[index_c-1-i] = tmp;
+    }
+    ret_str[index_c] = '\0';
+    return ret_str;
 }
-    
