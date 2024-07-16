@@ -1,33 +1,23 @@
-// 回文（順讀和倒讀都一樣的詞、詩句等）
-// 看PC上寫的方式
-
 bool isPalindrome(char* s) {
-    int strlen_s = strlen(s);
-    if (strlen_s <= 1) return true;
-    int i = 0, j = strlen_s-1;
-    char a = '\0', b = '\0';
-    while (i <= j) {
-        if (a == '\0') {
-            if (s[i] >= 'A' && s[i] <= 'Z') {
-                a = s[i]-'A'+'a'; 
-            } else if (s[i] >= 'a' && s[i] <= 'z' || s[i] >= '0' && s[i] <= '9') {
-                a = s[i];
-            }
-            i++;
-        } else if (b == '\0') {
-            if (s[j] >= 'A' && s[j] <= 'Z') {
-                b = s[j]-'A'+'a'; 
-            } else if (s[j] >= 'a' && s[j] <= 'z' || s[j] >= '0' && s[j] <= '9') {
-                b = s[j];
-            }
-            j--;
+    int str_len_s = strlen(s);
+    char* new_s = (char *) malloc(sizeof(char) * str_len_s);
+    if (str_len_s <= 1) {
+        return true;
+    }
+    int count = 0;
+    // convert uppercase into lowercase
+    for (int i = 0; i < str_len_s; i++) {
+        if (s[i] >= 'A' && s[i] <= 'Z') {
+            new_s[count++] = s[i]-'A'+'a';
+        } else if (s[i] >= 'a' && s[i] <= 'z') {
+            new_s[count++] = s[i];
+        } else if (s[i] >= '0' && s[i] <= '9') {
+            new_s[count++] = s[i];
         }
-        if (a != '\0' && b != '\0' && a != b) {
+    }
+    for (int i = 0; i < count/2; i++) {
+        if (new_s[i] != new_s[count - i -1]) {
             return false;
-        }
-        else if (a != '\0' && b != '\0' && a == b){
-            a = '\0';
-            b = '\0';
         }
     }
     return true;
