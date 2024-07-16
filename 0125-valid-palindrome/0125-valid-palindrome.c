@@ -17,8 +17,10 @@ bool isPalindrome(char* s) {
     }
     for (int i = 0; i < count/2; i++) {
         if (new_s[i] != new_s[count - i -1]) {
+            free(new_s);
             return false;
         }
     }
+    free(new_s);
     return true;
 }
