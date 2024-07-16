@@ -8,36 +8,41 @@ bool isValid(char* s) {
     int i = 0;
     int j = 0;
     while (i < str_len_s) {
-        printf("s[%d] = %c\n", i, s[i]);
         if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
             stack_s[j++] = s[i];
         } else {
             if (j <= 0) {
+                free(stack_s);
                 return false;
             }
             if (s[i] == ')') {
                 if (stack_s[j-1] == '(') {
                     j--;
                 } else {
+                    free(stack_s);
                     return false;
                 }
             } else if (s[i] == ']') {
                 if (stack_s[j-1] == '[') {
                     j--;
                 } else {
+                    free(stack_s);
                     return false;
                 }
             } else if (s[i] == '}') {
                 if (stack_s[j-1] == '{') {
                     j--;
                 } else {
+                    free(stack_s);
                     return false;
                 }
             }
         }
         i++;
     }
-    if (j != 0) return false;
-    //free(stack_s);
+    free(stack_s);
+    if (j != 0) {
+        return false;
+    }
     return true;
 }
