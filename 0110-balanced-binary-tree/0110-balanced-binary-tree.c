@@ -22,8 +22,6 @@ int sub_isBalanced(struct TreeNode* root, int depth) {
 bool isBalanced(struct TreeNode* root) {
     int depth = 0;
     if (root == NULL) return true;
-    //int left = sub_isBalanced(root->left, depth+1);
-    //int right = sub_isBalanced(root->right, depth+1);
     // need to add depth of root in function.
     if (sub_isBalanced(root, depth) != -1) {
         return true;
