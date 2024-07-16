@@ -6,37 +6,28 @@
  *     struct TreeNode *right;
  * };
  */
-
-int count_branch(struct TreeNode* root) {
-    int count_num = 0;
-    if (root == NULL) return 0;
-    else if (root->left == NULL && root->right == NULL) return 1;
-    else {
-        int cr = count_branch(root->right);
-        int cl = count_branch(root->left);
-
-        if (cr < 0 || cl < 0 || fabs(cr - cl) > 1)
+int sub_isBalanced(struct TreeNode* root, int depth) {
+    if (root == NULL) return depth;
+    if (root->left == NULL && root->right == NULL) return depth+1;
+    // else 
+    int left = sub_isBalanced(root->left, depth+1);
+    int right = sub_isBalanced(root->right, depth+1);
+    
+    if (abs(left - right) > 1 || left == -1 || right == -1) {
         return -1;
-        count_num += 1 + fmax(cl, cr);
     }
-    return count_num;
+    return fmax(left, right);
 }
 
 bool isBalanced(struct TreeNode* root) {
+    int depth = 0;
     if (root == NULL) return true;
-    if (count_branch(root) >= 0) return true;
-    else return false;
-}
-/* 力扣官方题解
-===========================
-
-
-
-bool isBalanced(struct TreeNode* root) {
-    if (root == NULL) {
+    int left = sub_isBalanced(root->left, depth+1);
+    int right = sub_isBalanced(root->right, depth+1);
+    // need to add depth of root in function.
+    if (right >= 0 && left >= 0 && abs(left - right) <= 1) {
         return true;
-    } else {
-        return fabs(height(root->left) - height(root->right)) <= 1 && isBalanced(root->left) && isBalanced(root->right);
     }
+    return false;
+
 }
-*/
