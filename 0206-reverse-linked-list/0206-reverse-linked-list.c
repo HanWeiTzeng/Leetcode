@@ -10,9 +10,8 @@ struct ListNode* reverseList(struct ListNode* head) {
     // create new pointer
     struct ListNode* ret_list = head;
     struct ListNode* check_node = head;
-    struct ListNode* tmp = NULL;
     while (check_node != NULL) {
-        tmp = check_node->next;
+        struct ListNode* tmp = check_node->next;
         if (ret_list == check_node) {
             ret_list->next = NULL;
         } else {
