@@ -13,7 +13,6 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
             } else {
                 ret_arr[0] = i;
                 ret_arr[1] = j;
-                printf("Catch!, ret_arr[0] %d, ret_arr[1] %d", ret_arr[0], ret_arr[1]);
                 return ret_arr;
             }
         }
