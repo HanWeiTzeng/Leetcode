@@ -37,7 +37,7 @@ char* addBinary(char* a, char* b) {
             ret_str[index_c++] = '1';
         } else if (b[index_b] == '0' && carry == 1) {
             ret_str[index_c++] = '1';
-            carry = 1;
+            carry = 0;
         } else if (b[index_b] == '0' && carry == 0) {
             ret_str[index_c++] = '0';
         }
@@ -50,7 +50,7 @@ char* addBinary(char* a, char* b) {
             ret_str[index_c++] = '1';
         } else if (a[index_a] == '0' && carry == 1) {
             ret_str[index_c++] = '1';
-            carry = 1;
+            carry = 0;
         } else if (a[index_a] == '0' && carry == 0) {
             ret_str[index_c++] = '0';
         }
@@ -59,11 +59,13 @@ char* addBinary(char* a, char* b) {
     if (carry == 1) {
         ret_str[index_c++] = '1';
     }
+    printf("%s", ret_str);
     for (int i = 0; i < index_c/2; i++) {
         char tmp = ret_str[i];
         ret_str[i] = ret_str[index_c-1-i];
         ret_str[index_c-1-i] = tmp;
     }
     ret_str[index_c] = '\0';
+    printf("%s", ret_str);
     return ret_str;
 }
