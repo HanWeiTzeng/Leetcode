@@ -1,19 +1,22 @@
 int search(int* nums, int numsSize, int target) {
-    int left = 0;
-    int right = numsSize - 1;
-// search target at middle = numsSize/2
-// end while loop when left = right/
-    while (left <= right) {
-        int middle = (left + right)/2;
-// smaller than nums[middle]. middle = middle+ left/2;
-// update left/ right.
-        if (target < nums[middle]) {
-            right = middle - 1;
-        } else if (target > nums[middle]) {
-            left = middle + 1;
-        } else {
+    // check middle of array
+    int i = 0, j = numsSize - 1;
+    int middle = (i + j) / 2;
+    while (i < j) {
+        if (nums[middle] == target) {
             return middle;
+        } else if (nums[middle] > target) {
+            j = middle-1;
+        } else {
+            i = middle+1;
         }
+        middle = (i + j) / 2;
     }
+    // divide it into 2 pieces by bigger than nums[middle] or smaller.
+    // check the boundary
+    if (nums[i] == target) {
+        return i;
+    }
+    // return -1 if hit boundary.
     return -1;
 }
