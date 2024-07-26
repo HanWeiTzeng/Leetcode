@@ -43,12 +43,16 @@ void mergesort(int* array, int head, int tail) {
         mergeSortedArray(array, head, middle, tail);
     }
 }
-
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
 int minMovesToSeat(int* seats, int seatsSize, int* students, int studentsSize) {
     // arrange all seats
-    mergesort(seats, 0, seatsSize - 1);
+    //mergesort(seats, 0, seatsSize - 1);
     // then arrange all student
-    mergesort(students, 0, studentsSize - 1);
+    //mergesort(students, 0, studentsSize - 1);
+    qsort(seats, seatsSize, sizeof(int), compare);
+    qsort(students, studentsSize, sizeof(int), compare);
     // cal all distance one by one.
     int count = 0;
     for (int i = 0; i < seatsSize; i++) {
