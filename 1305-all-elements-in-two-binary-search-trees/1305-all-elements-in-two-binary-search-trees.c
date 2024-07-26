@@ -11,12 +11,8 @@
  */
 
 int count_nodes(struct TreeNode* root) {
-    if (root == NULL)
-        return 0;
-    int count = 0;
-    count++;
-    count += count_nodes(root->left) + count_nodes(root->right);
-    return count;
+    if (root == NULL) return 0;
+    return count_nodes(root->left) + count_nodes(root->right) + 1;
 }
 
 int insert_node_into_array(struct TreeNode* root, int* array, int index) {
