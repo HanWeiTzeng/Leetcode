@@ -6,19 +6,18 @@
  *     struct TreeNode *right;
  * };
  */
- #define MAX(A,B) ((A) > (B)? (A) : B)
+int subfunction(struct TreeNode* root, int *max) {
+    if (root == NULL) return 0;
 
-int helper(struct TreeNode* root, int* ans) {
-    if (!root) return 0;
+    int left_length = subfunction(root->left, max);
+    int right_length = subfunction(root->right, max);
+    int total_length_tmp = left_length + right_length;
+    *max = fmax(*max, total_length_tmp);
 
-    int left = helper(root->left, ans);
-    int right = helper(root->right, ans);
-    *ans = MAX(*ans, left + right + 1);
-    return MAX(left, right) + 1;
+    return (left_length > right_length ? left_length : right_length) + 1;
 }
-
 int diameterOfBinaryTree(struct TreeNode* root) {
-    int ans = 0;
-    helper(root, &ans);
-    return ans-1;
+    int max = 0;
+    subfunction(root, &max);
+    return max;
 }
