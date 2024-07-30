@@ -5,19 +5,15 @@ void swap(int *a, int *b) {
 }
 
 void moveZeroes(int* nums, int numsSize) {
-    int index_zero = 0, index_none_zero = 0;
+    int left = 0, right = 0;
     // detect 0 and use swap to switch
-    while (index_zero < numsSize && index_none_zero < numsSize) {
-        /*while (nums[index_zero] != 0) {
-            printf("index_zero nums[%d] = %d\n", index_zero, nums[index_zero]);
-            index_zero++;
-        }*/
-        while (nums[index_none_zero] == 0 && index_none_zero < numsSize) {
-            printf("index_none_zero nums[%d] = %d\n", index_none_zero, nums[index_none_zero]);
-            index_none_zero++;
+    while (right < numsSize) {
+        if (nums[right] != 0) {
+            if (left != right) {
+                swap(nums+left, nums+right);
+            }
+            left++;
         }
-        swap(nums + index_zero, nums + index_none_zero);
-        index_zero++;
-        index_none_zero++;
+        right++;
     }
 }
