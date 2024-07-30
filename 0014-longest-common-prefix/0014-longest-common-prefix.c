@@ -13,6 +13,6 @@ char* longestCommonPrefix(char** strs, int strsSize) {
             }
         }
     }
-    ret_s[len_s] = '\0';
+    //ret_s[len_s] = '\0';
     return ret_s;
 }
