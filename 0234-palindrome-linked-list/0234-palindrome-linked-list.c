@@ -5,39 +5,49 @@
  *     struct ListNode *next;
  * };
  */
-
-//  1. 可以用矩陣存下來
-//  2. 翻轉整個記下來
-//  3. 直接翻轉原本的一半(還不會)
-
-//  ====================
-//  第一版
-bool isPalindrome(struct ListNode* head) {
-    if (head->next == NULL) return head;
-
-    struct ListNode *revNode_final;
-    struct ListNode *node1 = head, *node2 = head;
-    while (node1 != NULL) {
-        if (node1 == head) {
-            struct ListNode *revNode;
-            revNode = malloc(sizeof(struct ListNode));
-            revNode->val = node1->val;
-            revNode->next = NULL;
-            revNode_final = revNode;
-        } else {
-            struct ListNode *addNode;
-            addNode = malloc(sizeof(struct ListNode));
-            addNode->val = node1->val;
-            addNode->next = revNode_final;
-            revNode_final = addNode;
-        }
-        node1 = node1->next;
+struct ListNode* reverse_ll_fun(struct ListNode* head) {
+    /*if (head == NULL || head->next == NULL) {
+        return head ;
     }
-
-    while(revNode_final != NULL && node2 != NULL) {
-        if(revNode_final->val != node2->val) return false;
-        revNode_final = revNode_final->next;
-        node2 = node2->next;
+    */
+    struct ListNode* pre = NULL;
+    struct ListNode* curr = head;
+    while (curr != NULL) {
+        struct ListNode* tmp = curr->next;
+        curr->next = pre;
+        pre = curr;
+        curr = tmp;
+    }
+    return pre;
+}
+bool isPalindrome(struct ListNode* head) {
+    // use slow/fast and reverse the first
+    if (head == NULL || head->next == NULL) {
+        return true;
+    }
+    int number_of_node = 0;
+    struct ListNode* runner = head;
+    while (runner != NULL) {
+        number_of_node++;
+        runner = runner->next;
+    }
+    // deal with odd numbers and even
+    printf("number_of_node %d\n", number_of_node);
+    struct ListNode* reverse_ll = head;
+    int reverse_count = (number_of_node+1)/2;
+    while (reverse_count != 0) {
+        reverse_ll = reverse_ll->next;
+        reverse_count--;
+    }
+    reverse_ll = reverse_ll_fun(reverse_ll);
+    // cmp them.
+    while (reverse_ll != NULL) {
+        printf("%d %d\n", reverse_ll->val, head->val);
+        if (reverse_ll->val != head->val) {
+            return false;
+        }
+        reverse_ll = reverse_ll->next;
+        head = head->next;
     }
     return true;
 }
