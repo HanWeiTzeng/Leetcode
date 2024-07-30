@@ -1,109 +1,65 @@
-//  三種做法:
-//  1. 900/400 直觀
-//  2. +100 then 1000-200/ +100 then 500-200
-//  3. 用前面 >後面 去算
-
 int romanToInt(char* s) {
-    int i = 0;
-    int count = 0;
-    for (int i = 0; i < strlen(s); i++) {
-        switch (s[i]) {
-            case 'I':
-                if (i < strlen(s)-1 && s[i+1] == 'V') {
-                    count += 4;
-                    i++;
-                } else if (i < strlen(s)-1 && s[i+1] == 'X') {
-                    count += 9;
-                    i++;
-                } else {
-                    count += 1;
-                }
-                break;
-            case 'V':
-                count += 5;
-                break;
-            case 'X':
-                if (i < strlen(s)-1 && s[i+1] == 'L') {
-                    count += 40;
-                    i++;
-                } else if (i < strlen(s)-1 && s[i+1] == 'C') {
-                    count += 90;
-                    i++;
-                } else {
-                    count += 10;
-                }
-                break;
-            case 'L':
-                count += 50;
-                break;
-            case 'C':
-                if (i < strlen(s)-1 && s[i+1] == 'D') {
-                    count += 400;
-                    i++;
-                } else if (i < strlen(s)-1 && s[i+1] == 'M') {
-                    count += 900;
-                    i++;
-                } else {
-                    count += 100;
-                }
-                break;
-            case 'D':
-                count += 500;
-                break;
-            case 'M':
-                count += 1000;
-                break;
-        }
-    }
-    return count;
-}
+    // get length of string.
+    int str_len = strlen(s);
+    int index = 0;
+    int total = 0;
 
-/* int romanToInt(char* s) {
-    int i = 0;
-    int count = 0;
-    for (int i = 0; i < strlen(s); i++) {
-        switch (s[i]) {
-            case 'I':
-                count += 1;
+    // distinguish I II III IV V VI VII VIII IX X
+    // deal with it and start from M
+    //while (index < str_len) {
+    for (index = 0; index < str_len; index++) {
+        switch(s[index]) {
+            case 'M':
+                total += 1000;
                 break;
-            case 'V':
-                count += 5;
-                if (i > 0 && s[i-1] == 'I') {
-                   count -= 2; 
-                }
+            case 'D':
+                total += 500;
                 break;
-            case 'X':
-                count += 10;
-                if (i > 0 && s[i-1] == 'I') {
-                   count -= 2; 
+            case 'C':
+                total += 100;
+                if (index+1 < str_len) {
+                    if (s[index+1] == 'D') {
+                        total = total - 200 + 500;
+                        index++;
+                    } else if (s[index+1] == 'M') {
+                        total = total - 200 + 1000;
+                        index++;
+                    }
                 }
                 break;
             case 'L':
-                count += 50;
-                if (i > 0 && s[i-1] == 'X') {
-                   count -= 20; 
+                total += 50;
+                break;
+            case 'X':
+                total += 10;
+                if (index+1 < str_len) {
+                    if (s[index+1] == 'L') {
+                        total = total - 20 + 50;
+                        index++;
+                    } else if (s[index+1] == 'C') {
+                        total = total - 20 + 100;
+                        index++;
+                    }
                 }
                 break;
-            case 'C':
-                count += 100;
-                if (i > 0 && s[i-1] == 'X') {
-                   count -= 20; 
-                }
+            case 'V':
+                total += 5;
                 break;
-            case 'D':
-                count += 500;
-                if (i > 0 && s[i-1] == 'C') {
-                   count -= 200; 
-                }
-                break;
-            case 'M':
-                count += 1000;
-                if (i > 0 && s[i-1] == 'C') {
-                   count -= 200; 
+            case 'I':
+                total += 1;
+                if (index+1 < str_len) {
+                    if (s[index+1] == 'V') {
+                        total = total - 2 + 5;
+                        index++;
+                    } else if (s[index+1] == 'X') {
+                        total = total - 2 + 10;
+                        index++;
+                    }
                 }
                 break;
         }
+        //index++;
     }
-    return count;
+
+    return total;
 }
-*/
