@@ -1,18 +1,8 @@
-int hammingWeight(uint32_t n) {
-    int count_1_num = 0;
-    while (n) {
-        count_1_num += n % 2;
-        n = n >> 1;
+int hammingWeight(int n) {
+    int count_bit_1 = 0;
+    while (n != 0) {
+        count_bit_1++;
+        n &= n-1;
     }
-    return count_1_num;
+    return count_bit_1;
 }
-/*
-int hammingWeight(uint32_t n) {
-    int count_1_num = 0;
-    while (n) {
-        count_1_num += 1;
-        n &= (n-1);
-    }
-    return count_1_num;
-}
-*/
