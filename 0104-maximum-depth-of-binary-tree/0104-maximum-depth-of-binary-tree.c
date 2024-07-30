@@ -7,25 +7,18 @@
  * };
  */
 
-//  注意初始值 if root == NULL 是return 0不是1
+int subfunction(struct TreeNode* root, int level) {
+    if (root == NULL) {
+        return level;
+    }
 
+    int left_deep = subfunction(root->left, level + 1);     // 9
+    int right_deep = subfunction(root->right, level + 1);
+
+    return (left_deep > right_deep) ? left_deep : right_deep;
+}
 int maxDepth(struct TreeNode* root) {
-    if (!root) return 0;
-    int maxd = 1 + fmax(maxDepth(root->left), maxDepth(root->right));
-    return maxd;
+    int level = 0;
+    int ret_val = subfunction(root, level);
+    return ret_val;
 }
-
-/*
-===========================
-
-int maxDepth(struct TreeNode *root) {
-    if (root == NULL) return 0;
-    return fmax(maxDepth(root->left), maxDepth(root->right)) + 1;
-}
-
-
-作者：力扣官方题解
-链接：https://leetcode.cn/problems/maximum-depth-of-binary-tree/solutions/349250/er-cha-shu-de-zui-da-shen-du-by-leetcode-solution/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-*/
