@@ -1,63 +1,44 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-
-//  好幾種方法:
-
-//  ================== Two pointer ==================
 int* sortedSquares(int* nums, int numsSize, int* returnSize) {
-    int *ret_arr;
-    ret_arr = malloc(sizeof(int)*numsSize);
+    int *ret_arr = (int *)malloc(sizeof(int)* numsSize);
+    int index_min = 0;
+    int min_val = nums[0] * nums[0];
+
     *returnSize = numsSize;
-    for (int i = 0; i < numsSize; i++) nums[i] *= nums[i];
-    int left = 0, right = numsSize-1;
-    int len = numsSize - 1;
-    while (left <= right && len >= 0) {
-        if (nums[left] > nums[right]) {
-            ret_arr[len--] = nums[left++];
+
+    // square all elements in array and record the min value and it index.
+    for (int i = 0; i < numsSize; i++) {
+        nums[i] *= nums[i];
+        if (min_val > nums[i]) {
+            min_val = nums[i];
+            index_min = i;
+        }
+    }
+    int index_left = index_min - 1;
+    int index_right = index_min + 1;
+    // rearrange them by 2 index(pointer).
+    // while (index_left >= 0 && index_right < numsSize)
+    int index = 0;
+    ret_arr[index++] = nums[index_min];
+
+    while (index_left >= 0 && index_right < numsSize) {
+        if (nums[index_left] < nums[index_right]) {
+            ret_arr[index++] = nums[index_left--];
         } else {
-            ret_arr[len--] = nums[right--];
-        }
-
-    }
-    return ret_arr;
-}
-
-/*
-================== Quick Sort=====================
-
-int cmp(const void* e1, const void* e2) {
-    return *(int*)e1 - *(int*)e2;
-}
-
-int* sortedSquares(int* nums, int numsSize, int* returnSize) {
-    int *ret_arr;
-    ret_arr = malloc(sizeof(int)*numsSize);
-    *returnSize = numsSize;
-    for (int i = 0; i < numsSize; i++) ret_arr[i] = nums[i] * nums[i];
-    qsort(ret_arr, numsSize, sizeof(int), cmp); 		//// sort here.
-    return ret_arr;
-}
-
-==================Bubble Sort=====================
-
-int* sortedSquares(int* nums, int numsSize, int* returnSize) {
-    int *ret_arr;
-    ret_arr = malloc(sizeof(int)*numsSize);
-    *returnSize = numsSize;
-    for (int i = 0; i < numsSize; i++) nums[i] *= nums[i];
-    for (int i = 0; i < numsSize; i++) {
-        for (int j = i+1; j < numsSize; j++) {
-            if (nums[i] > nums[j]) {
-                int tmp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = tmp;
-            }
+            ret_arr[index++] = nums[index_right++];
         }
     }
-    for (int i = 0; i < numsSize; i++) {
-        ret_arr[i] = nums[i];
+
+    // deal with the rest of index_left >= 0 "or" index_right < numsSize
+    while (index_left >= 0) {
+        ret_arr[index++] = nums[index_left--];
     }
+    while (index_right < numsSize) {
+        ret_arr[index++] = nums[index_right++];
+    }
+
+    // return allocated array.
     return ret_arr;
 }
-*/
