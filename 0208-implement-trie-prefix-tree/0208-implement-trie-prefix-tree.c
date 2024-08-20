@@ -40,9 +40,9 @@ void trieInsert(Trie* obj, char* word) {
 
 bool trieSearch(Trie* obj, char* word) {
     struct node * runnode = obj->top;
-    printf("word = %s.\n", word);
+    //printf("word = %s.\n", word);
     while (runnode) {
-        printf("runnode->string = %s.\n", runnode->string);
+        //printf("runnode->string = %s.\n", runnode->string);
         if (strcmp(runnode->string, word) == 0) {
             return true;
         }
