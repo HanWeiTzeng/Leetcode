@@ -52,10 +52,10 @@ int orangesRotting(int** grid, int gridSize, int* gridColSize) {
             int x = rot_orange_index[i][0];
             int y = rot_orange_index[i][1];
             //printf("x = %d, y = %d.\n", x, y);
-            becomes_rotten(grid, x-1, y, gridSize, gridColSize[0], &count_rot_orange, (int **)rot_orange_index);
-            becomes_rotten(grid, x+1, y, gridSize, gridColSize[0], &count_rot_orange, (int **)rot_orange_index);
-            becomes_rotten(grid, x, y-1, gridSize, gridColSize[0], &count_rot_orange, (int **)rot_orange_index);
-            becomes_rotten(grid, x, y+1, gridSize, gridColSize[0], &count_rot_orange, (int **)rot_orange_index);
+            becomes_rotten(grid, x-1, y, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
+            becomes_rotten(grid, x+1, y, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
+            becomes_rotten(grid, x, y-1, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
+            becomes_rotten(grid, x, y+1, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
             //printf("round_times = %d, count_rot_orange = %d.\n", round_times, count_rot_orange);
             x_round = round_times;
         }
