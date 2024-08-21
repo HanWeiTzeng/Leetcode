@@ -98,6 +98,23 @@ int minStackGetMin(MinStack* obj) {
 }
 
 void minStackFree(MinStack* obj) {
+    //need to add more code.
+    struct linked_list *node1= obj->min;
+    struct linked_list *node1_next= obj->min->next;
+    struct linked_list *node2= obj->top;
+    struct linked_list *node2_next= obj->top->next;
+    while (node1_next) {
+        free(node1);
+        node1 = node1_next;
+        node1_next = node1_next->next;
+    }
+    free(node1);
+    while (node2_next) {
+        free(node2);
+        node2 = node2_next;
+        node2_next = node2_next->next;
+    }
+    free(node2);
     free(obj);
 }
 
