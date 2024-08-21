@@ -1,5 +1,5 @@
 
-void becomes_rotten(int** grid, int i, int j, int gridSize, int gridColSize, int *ptr_count_rot_orange, int **rot_orange_index) {
+void becomes_rotten(int** grid, int i, int j, int gridSize, int gridColSize, int *ptr_count_rot_orange, int rot_orange_index[][2]) {
     if (i >= 0 && i < gridSize && j >= 0 && j < gridColSize) {
         if (grid[i][j] == 1) {
             grid[i][j] = 2;
@@ -16,10 +16,11 @@ int orangesRotting(int** grid, int gridSize, int* gridColSize) {
     // create a int count_current_rot_times to
     int count_current_rot_times = 0;
 
+    int rot_orange_index[100][2] = {};/*
     int **rot_orange_index = (int **)malloc(100 * sizeof(int *));
     for (int i = 0; i < 100; i++) {
         rot_orange_index[i] = (int *)malloc(2 * sizeof(int));  // 2 columns to store (i, j)
-    }
+    }*/
 
     int count_rot_orange = 0;
     int total_orange = 0;
@@ -47,16 +48,13 @@ int orangesRotting(int** grid, int gridSize, int* gridColSize) {
     while (round_times < count_rot_orange) {
         round_times = count_rot_orange;
         
-        //printf("x_round %d count_rot_orange %d.\n", x_round, count_rot_orange);
         for (int i = x_round; i < round_times; i++) {
             int x = rot_orange_index[i][0];
             int y = rot_orange_index[i][1];
-            //printf("x = %d, y = %d.\n", x, y);
             becomes_rotten(grid, x-1, y, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
             becomes_rotten(grid, x+1, y, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
             becomes_rotten(grid, x, y-1, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
             becomes_rotten(grid, x, y+1, gridSize, gridColSize[0], &count_rot_orange, rot_orange_index);
-            //printf("round_times = %d, count_rot_orange = %d.\n", round_times, count_rot_orange);
             x_round = round_times;
         }
         if (round_times < count_rot_orange) {
