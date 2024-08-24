@@ -5,38 +5,36 @@ int search(int* nums, int numsSize, int target) {
     int first = 0;
     int last = numsSize - 1;
     int middle = (first + last) / 2;
+
     if (numsSize == 1) {
         if (nums[0] == target) {
             return 0;
         } else 
             return -1;
-    } else if (numsSize == 2) {
+    } 
+    /*else if (numsSize == 2) {
         if (nums[0] == target)
             return 0;
             else if (nums[1] == target)
                 return 1;
                 else
                     return -1;
-    }
+    }*/
 
     while (first < last) {
-        printf("nums[first = %d] = %d, nums[middle = %d] = %d, nums[last = %d] = %d.\n", first, nums[first], middle, nums[middle], last, nums[last]);
+        //printf("nums[first = %d] = %d, nums[middle = %d] = %d, nums[last = %d] = %d.\n", first, nums[first], middle, nums[middle], last, nums[last]);
         if (nums[middle] == target) return middle;
         if (nums[first] <= nums[middle]) {
             if (nums[first] <= target && target <= nums[middle]) {
-                printf("AAA");
                 last = middle;
             } else {
-                printf("AAA 1");
                 first = middle + 1;
             }
             middle = (first + last) / 2;
         } else if (nums[middle] <= nums[last]) {
             if (nums[middle] <= target && target <= nums[last]) {
-                printf("BBB");
                 first = middle;
             } else {
-                printf("BBB1");
                 last = middle - 1;
             }
             middle = (first + last) / 2;
