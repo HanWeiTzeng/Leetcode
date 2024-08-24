@@ -22,31 +22,21 @@ int search(int* nums, int numsSize, int target) {
     while (first < last) {
         printf("nums[first = %d] = %d, nums[middle = %d] = %d, nums[last = %d] = %d.\n", first, nums[first], middle, nums[middle], last, nums[last]);
         if (nums[middle] == target) return middle;
-        if (nums[first] <= nums[middle-1]) {
-            if (nums[first] <= target && target <= nums[middle-1]) {
+        if (nums[first] <= nums[middle]) {
+            if (nums[first] <= target && target <= nums[middle]) {
                 printf("AAA");
-                /*
-                if (nums[first] == target)
-                    return first;
-                    else if (target == nums[middle-1]) {
-                        return middle - 1;
-                    }
-                */
-                last = middle - 1;
+                last = middle;
             } else {
+                printf("AAA 1");
                 first = middle + 1;
             }
             middle = (first + last) / 2;
-        } else if (nums[middle+1] <= nums[last]) {
-            if (nums[middle+1] <= target && target <= nums[last]) {
-                //printf("BBB");
-                if (nums[middle+1] == target)
-                    return middle+1;
-                    else if (target == nums[last]) {
-                        return last;
-                    }
-                first = middle + 1;
+        } else if (nums[middle] <= nums[last]) {
+            if (nums[middle] <= target && target <= nums[last]) {
+                printf("BBB");
+                first = middle;
             } else {
+                printf("BBB1");
                 last = middle - 1;
             }
             middle = (first + last) / 2;
