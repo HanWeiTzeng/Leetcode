@@ -6,7 +6,6 @@
  */
 
 int ansSize;
-//int count = 0;
 int* ansColumnSize;
 
 void helper(int* candidates, int candidatesSize, int index, int target, int **ans, int *tmp_arr, int count) {
@@ -30,7 +29,6 @@ void helper(int* candidates, int candidatesSize, int index, int target, int **an
         tmp_arr[count] = candidates[index];
         //printf("target = %d. candidates[%d] = %d. count = %d\n", target, index, candidates[index], count);
         helper(candidates, candidatesSize, index, new_target, ans, tmp_arr, count+1);
-        count;
     }
 
 }
