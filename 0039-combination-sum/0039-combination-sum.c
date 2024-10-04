@@ -6,19 +6,19 @@
  */
 
 int ansSize;
-int count = 0;
+//int count = 0;
 int* ansColumnSize;
 
-void helper(int* candidates, int candidatesSize, int index, int target, int **ans, int *tmp_arr, int count_1) {
+void helper(int* candidates, int candidatesSize, int index, int target, int **ans, int *tmp_arr, int count) {
     if (index == candidatesSize) {
         return;
     }
     if (target == 0) {
-        ans[ansSize] = (int *) malloc(sizeof(int) * count_1);
-        for (int i = 0; i < count_1; ++i) {
+        ans[ansSize] = (int *) malloc(sizeof(int) * count);
+        for (int i = 0; i < count; ++i) {
             ans[ansSize][i] = tmp_arr[i];
         }
-        ansColumnSize[ansSize++] = count_1;
+        ansColumnSize[ansSize++] = count;
         //printf(" count = %d, ", count_1);
         //printf("Finded.\n");
         return;
@@ -27,10 +27,10 @@ void helper(int* candidates, int candidatesSize, int index, int target, int **an
 
     int new_target = target - candidates[index];
     if (new_target >= 0) {
-        tmp_arr[count++] = candidates[index];
+        tmp_arr[count] = candidates[index];
         //printf("target = %d. candidates[%d] = %d. count = %d\n", target, index, candidates[index], count);
-        helper(candidates, candidatesSize, index, new_target, ans, tmp_arr, count);
-        count--;
+        helper(candidates, candidatesSize, index, new_target, ans, tmp_arr, count+1);
+        count;
     }
 
 }
