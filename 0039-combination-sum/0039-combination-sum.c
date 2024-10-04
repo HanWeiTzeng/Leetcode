@@ -4,44 +4,45 @@
  * Note: Both returned array and *columnSizes array must be malloced, assume
  * caller calls free().
  */
-int candidatesSize_tmp;
 
 int ansSize;
-
-int combineSize;
-
+int count = 0;
 int* ansColumnSize;
 
-void dfs(int* candidates, int target, int** ans, int* combine, int idx) {
-    if (idx == candidatesSize_tmp) {
+void helper(int* candidates, int candidatesSize, int index, int target, int **ans, int *tmp_arr, int count_1) {
+    if (index == candidatesSize) {
         return;
     }
     if (target == 0) {
-        int* tmp = malloc(sizeof(int) * combineSize);
-        for (int i = 0; i < combineSize; ++i) {
-            tmp[i] = combine[i];
+        ans[ansSize] = (int *) malloc(sizeof(int) * count_1);
+        for (int i = 0; i < count_1; ++i) {
+            ans[ansSize][i] = tmp_arr[i];
         }
-        ans[ansSize] = tmp;
-        ansColumnSize[ansSize++] = combineSize;
+        ansColumnSize[ansSize++] = count_1;
+        printf(" count = %d, ", count_1);
+        printf("Finded.\n");
         return;
     }
-    // 直接跳过
-    dfs(candidates, target, ans, combine, idx + 1);
-    // 选择当前数
-    if (target - candidates[idx] >= 0) {
-        combine[combineSize++] = candidates[idx];
-        dfs(candidates, target - candidates[idx], ans, combine, idx);
-        combineSize--;
+    helper(candidates, candidatesSize, index+1, target, ans, tmp_arr, count);
+
+    int new_target = target - candidates[index];
+    if (new_target >= 0) {
+        tmp_arr[count++] = candidates[index];
+        printf("target = %d. candidates[%d] = %d. count = %d\n", target, index, candidates[index], count);
+        helper(candidates, candidatesSize, index, new_target, ans, tmp_arr, count);
+        count--;
     }
+
 }
 
-int** combinationSum(int* candidates, int candidatesSize, int target, int* returnSize, int** returnColumnSizes) {
-    candidatesSize_tmp = candidatesSize;
-    ansSize = combineSize = 0;
+int** combinationSum(int* candidates, int candidatesSize, int target,
+                     int* returnSize, int** returnColumnSizes) {
+    // use the first candidates element, and minize it from target.
     int** ans = malloc(sizeof(int*) * 1001);
     ansColumnSize = malloc(sizeof(int) * 1001);
-    int combine[2001];
-    dfs(candidates, target, ans, combine, 0);
+    int tmp_arr[40];
+    ansSize = 0;
+    helper(candidates, candidatesSize, 0, target, ans, tmp_arr, 0);
     *returnSize = ansSize;
     *returnColumnSizes = ansColumnSize;
     return ans;
