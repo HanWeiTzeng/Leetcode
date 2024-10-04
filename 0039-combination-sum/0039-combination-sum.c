@@ -19,8 +19,8 @@ void helper(int* candidates, int candidatesSize, int index, int target, int **an
             ans[ansSize][i] = tmp_arr[i];
         }
         ansColumnSize[ansSize++] = count_1;
-        printf(" count = %d, ", count_1);
-        printf("Finded.\n");
+        //printf(" count = %d, ", count_1);
+        //printf("Finded.\n");
         return;
     }
     helper(candidates, candidatesSize, index+1, target, ans, tmp_arr, count);
@@ -28,7 +28,7 @@ void helper(int* candidates, int candidatesSize, int index, int target, int **an
     int new_target = target - candidates[index];
     if (new_target >= 0) {
         tmp_arr[count++] = candidates[index];
-        printf("target = %d. candidates[%d] = %d. count = %d\n", target, index, candidates[index], count);
+        //printf("target = %d. candidates[%d] = %d. count = %d\n", target, index, candidates[index], count);
         helper(candidates, candidatesSize, index, new_target, ans, tmp_arr, count);
         count--;
     }
