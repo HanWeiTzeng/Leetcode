@@ -11,14 +11,10 @@ int compare_arrays(const void *a, const void *b) {
 }
 
 int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* returnSize, int** returnColumnSizes) {
+    int **ret_arr = (int **)malloc(sizeof(int *) * intervalsSize);
     *returnSize = 0;
-    // this algorithm need to deal with every 2 interval at one time.
     *returnColumnSizes = (int *) malloc(sizeof(int )* intervalsSize);
 
-    int **ret_arr = (int **)malloc(sizeof(int *) * intervalsSize);
-    for (int i = 0; i < intervalsSize; i++) {
-        ret_arr[i] = (int *)malloc(sizeof(int) * intervalsColSize[i]);
-    }
     // Use qsort to sort the array based on the first element of each sub-array
     qsort(intervals, intervalsSize, sizeof(int *), compare_arrays);
 
@@ -29,6 +25,7 @@ int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* retu
     while (index_2nd < intervalsSize) {
         // case 0: x01 < x10 => do nothing
         if (intervals[index_1st][1] < intervals[index_2nd][0]) {
+            ret_arr[*returnSize] = (int *)malloc(sizeof(int) * 2);
             (*returnColumnSizes)[(*returnSize)] = 2;
             ret_arr[*returnSize][0] = intervals[index_1st][0];
             ret_arr[*returnSize][1] = intervals[index_1st][1];
@@ -45,11 +42,10 @@ int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* retu
     }
 
     // index < intervalsSize-1
-    if (index_2nd == intervalsSize) {
-        (*returnColumnSizes)[*returnSize] = 2;
-        ret_arr[*returnSize][0] = intervals[index_1st][0];
-        ret_arr[*returnSize][1] = intervals[index_1st][1];
-        *returnSize += 1;
-    }
+    ret_arr[*returnSize] = (int *)malloc(sizeof(int) * 2);
+    (*returnColumnSizes)[*returnSize] = 2;
+    ret_arr[*returnSize][0] = intervals[index_1st][0];
+    ret_arr[*returnSize][1] = intervals[index_1st][1];
+    *returnSize += 1;
     return ret_arr;
 }
