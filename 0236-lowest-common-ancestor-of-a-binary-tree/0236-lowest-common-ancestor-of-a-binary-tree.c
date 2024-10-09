@@ -17,14 +17,11 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
     }
     struct TreeNode* Ansleft = lowestCommonAncestor(root->left, p, q);
     struct TreeNode* Ansright = lowestCommonAncestor(root->right, p, q);
-    if (Ansleft != NULL && Ansright == NULL) {
-        return Ansleft;
-    }
-    if (Ansright != NULL && Ansleft == NULL) {
-        return Ansright;
-    }
     if (Ansright != NULL && Ansleft != NULL) {
         return root;
-    }
-    return NULL;
+    } else if (Ansright != NULL && Ansleft == NULL) {
+        return Ansright;
+    } else if (Ansleft != NULL && Ansright == NULL) {
+        return Ansleft;
+    } else return NULL;
 }
