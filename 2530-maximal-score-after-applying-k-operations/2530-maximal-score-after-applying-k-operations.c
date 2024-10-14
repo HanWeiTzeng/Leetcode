@@ -37,7 +37,6 @@ void heapify(MaxHeap *heap, int i) {
 
 // Insert a new value into the priority queue
 void insert(MaxHeap *heap, int value) {
-
     // Insert new value at the end of the heap
     heap->size++;
     int i = heap->size - 1;
