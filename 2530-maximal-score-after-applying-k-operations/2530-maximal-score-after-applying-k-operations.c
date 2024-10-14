@@ -51,45 +51,16 @@ void insert(MaxHeap *heap, int value) {
 }
 
 // Remove and return the element with the highest priority
-int extractMax(MaxHeap *heap) {
-    if (heap->size <= 0) {
-        printf("Queue is empty\n");
-        return -1;
-    }
-
-    if (heap->size == 1) {
-        heap->size--;
-        return heap->data[0];
-    }
-
-    // Store the maximum value, and remove it from the heap
-    int root = heap->data[0];
+void extractMax(MaxHeap *heap) {
+    // remove it from the heap
     heap->data[0] = heap->data[heap->size - 1];
     heap->size--;
 
     // Heapify the root
     heapify(heap, 0);
 
-    return root;
+    return;
 }
-
-// Peek at the maximum value without removing it
-int peek(MaxHeap *heap) {
-    if (heap->size <= 0) {
-        printf("Queue is empty\n");
-        return -1;
-    }
-    return heap->data[0];
-}
-
-// Print the priority queue (max heap)
-void printQueue(MaxHeap *heap) {
-    for (int i = 0; i < heap->size; i++) {
-        printf("%d ", heap->data[i]);
-    }
-    printf("\n");
-}
-
 
 long long maxKelements(int* nums, int numsSize, int k) {
     // declare a return value.
