@@ -1,9 +1,8 @@
-#define MAX 100
 
 // A structure to represent a Max-Heap (Priority Queue)
 typedef struct {
     int size;
-    int data[MAX];
+    int *data;
 } MaxHeap;
 
 // Function to swap two elements
@@ -38,10 +37,6 @@ void heapify(MaxHeap *heap, int i) {
 
 // Insert a new value into the priority queue
 void insert(MaxHeap *heap, int value) {
-    if (heap->size == MAX) {
-        printf("Queue is full\n");
-        return;
-    }
 
     // Insert new value at the end of the heap
     heap->size++;
@@ -101,6 +96,7 @@ long long maxKelements(int* nums, int numsSize, int k) {
     long long ret_val = 0;
     MaxHeap heap;
     heap.size = 0;
+    heap.data = (int *)malloc(sizeof(int) * numsSize);
 
     for (int i = 0; i < numsSize; i++) {
         insert(&heap, nums[i]);
@@ -114,7 +110,6 @@ long long maxKelements(int* nums, int numsSize, int k) {
         extractMax(&heap);
         insert(&heap, new_value);
     }
-
 
     return ret_val;
 }
