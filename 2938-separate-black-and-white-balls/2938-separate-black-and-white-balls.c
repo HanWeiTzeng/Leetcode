@@ -8,7 +8,7 @@ long long minimumSteps(char* s) {
     // count how much steps to move all 1 to right side.
     long long steps = 0;
     int str_len_s = strlen(s);  // 3
-    int rightest_zero_position[100000];
+    int rightest_zero_position[10000];
     int count_zero = -1;
     int count_zero_head = 0;
     int i = str_len_s-1;
