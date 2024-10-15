@@ -72,8 +72,7 @@ int* smallestRange(int** nums, int numsSize, int* numsColSize, int* returnSize) 
         HeapNode curr = popHeap(minHeap, &heapSize);
         int curMin = curr.value, listIdx = curr.listIdx, elemIdx = curr.elemIdx;
 
-        if ((curMax - curMin < smallRange[1] - smallRange[0]) ||
-            (curMax - curMin == smallRange[1] - smallRange[0] && curMin < smallRange[0])) {
+        if ((curMax - curMin < smallRange[1] - smallRange[0])) {
             printf("curMin = %d < smallRange[0] %d? .\n", curMin, smallRange[0]);
             smallRange[0] = curMin;
             smallRange[1] = curMax;
