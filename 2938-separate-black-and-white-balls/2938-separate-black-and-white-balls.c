@@ -22,7 +22,8 @@ long long minimumSteps(char* s) {
                 steps += (rightest_zero_position[count_zero_head] - i);
                 //printf("swap %d %d.\n", i, rightest_zero_position[count_zero]);
                 swap(s + i, s + rightest_zero_position[count_zero_head++]);
-                size--;
+                // record this index into heap.
+                rightest_zero_position[++count_zero] = i;
             }
         } else if (s[i] == '0'){
             // record its index;
