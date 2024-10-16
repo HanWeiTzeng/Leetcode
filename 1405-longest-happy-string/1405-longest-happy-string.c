@@ -9,7 +9,7 @@ char* longestDiverseString(int a, int b, int c) {
     while (a > 0 && b > 0 || a > 0 && c > 0 || b > 0 && c > 0) {
         printf("cur_le %c %d %d %d.\n", current_letter, a, b, c);
         if (a >= b && a >= c) {
-            while (count < 2) {
+            while (count < 2 && a > 0) {
                 if (current_letter == 'a')
                     count++;
                 else {
@@ -33,7 +33,7 @@ char* longestDiverseString(int a, int b, int c) {
                 count++;
             }
         } else if (b >= a && b >= c) {
-            while (count < 2) {
+            while (count < 2 && b > 0) {
                 if (current_letter == 'b')
                     count++;
                 else {
@@ -57,7 +57,7 @@ char* longestDiverseString(int a, int b, int c) {
                 c--;
             }
         } else if (c >= a && c >= b) {
-            while (count < 2) {
+            while (count < 2 && c > 0) {
                 if (current_letter == 'c')
                     count++;
                 else {
