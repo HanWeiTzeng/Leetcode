@@ -7,7 +7,7 @@ char* longestDiverseString(int a, int b, int c) {
     int total = 0;
     // first 2 should be most
     while (a > 0 && b > 0 || a > 0 && c > 0 || b > 0 && c > 0) {
-        printf("cur_le %c %d %d %d.\n", current_letter, a, b, c);
+        //printf("cur_le %c %d %d %d.\n", current_letter, a, b, c);
         if (a >= b && a >= c) {
             while (count < 2 && a > 0) {
                 if (current_letter == 'a')
